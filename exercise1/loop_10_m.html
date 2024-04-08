@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //loop_10_m
+    let num = prompt("enter a number to break:");
+    let strNum = num.toString();
+    let rng = 10 ** (strNum.length - 1);
+    while (rng > 0 && num > 0) {
+      console.log(parseInt(num / rng));
+      num -= rng * parseInt(num / rng);
+      rng = rng / 10;
+    }
+  </script>
+</html>
