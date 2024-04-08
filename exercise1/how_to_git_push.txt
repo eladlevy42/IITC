@@ -1,0 +1,6 @@
+git add -A
+git commit -m "the note"
+git push
+
+
+תראה שאתה תופס את התיקייה שאתה רוצה לעדכן! ולא סתם בתז
