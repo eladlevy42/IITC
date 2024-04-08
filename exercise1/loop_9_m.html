@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>loop_9_m</title>
+  </head>
+  <body></body>
+  <script>
+    let num = parseInt(prompt("enter a number: (to stop enter a number <=0)"));
+    let min = parseInt(num);
+    let max = parseInt(num);
+    while (num > 0) {
+      num = parseInt(prompt("enter a number: (to stop enter a number <=0)"));
+      if (num > 0) {
+        if (parseInt(num) > max) {
+          max = parseInt(num);
+        }
+        if (num < min) {
+          min = parseInt(num);
+        }
+      }
+    }
+    alert("max is: " + max + ", min is: " + min);
+  </script>
+</html>

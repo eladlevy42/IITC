@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=let mac, initial-scale=1.0" />
+    <title>loop_6_m</title>
+  </head>
+  <body></body>
+  <script>
+    let max = 0;
+    let num = parseInt(prompt("enter number: "));
+    let min = num;
+    let count = num;
+    let i = 1;
+    while (i <= 4) {
+      num = parseInt(prompt("enter number: "));
+      if (num > max) {
+        max = num;
+      }
+      if (num < min) {
+        min = max;
+      }
+      i++;
+    }
+    alert("max is: " + max + ", min is: " + min);
+  </script>
+</html>
