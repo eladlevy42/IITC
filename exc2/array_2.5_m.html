@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    function if_in_arr(arr, num) {
+      for (let i of arr) {
+        if (i == num) {
+          return true;
+        }
+      }
+      return false;
+    }
+    arre = [5, 6, 7, 11, 9];
+    console.log(if_in_arr(arre, 8));
+  </script>
+</html>

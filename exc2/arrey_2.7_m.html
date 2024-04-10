@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    function num_of_duplicates(arr1, arr2) {
+      let sum_duplicates = 0;
+      for (let i of arr1) {
+        for (let j of arr2) {
+          if (j == i) {
+            sum_duplicates++;
+          }
+        }
+      }
+      return sum_duplicates;
+    }
+
+    let arr3 = [1, 2, 3];
+    let arr4 = [3, 4, 5];
+    console.log(num_of_duplicates(arr3, arr4));
+  </script>
+</html>

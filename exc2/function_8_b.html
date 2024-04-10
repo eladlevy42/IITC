@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    function connect(num) {
+      let str_of_num = num.toString();
+      let ans = 0;
+      for (let i = 0; i < str_of_num.length; i++) {
+        ans += parseInt(str_of_num[i]);
+      }
+      return ans;
+    }
+    console.log(connect(123));
+  </script>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let one = 1;
+    let two = 2;
+    function switch_numbers() {
+      alert(`one = ${one} and two = ${two}`);
+      let copy = one;
+      one = two;
+      two = copy;
+      alert(`one = ${one} and two = ${two}`);
+    }
+    switch_numbers();
+  </script>
+</html>
