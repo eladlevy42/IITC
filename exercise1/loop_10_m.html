@@ -3,18 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>loop_10_m</title>
   </head>
   <body></body>
   <script>
-    //loop_10_m
-    let num = prompt("enter a number to break:");
-    let strNum = num.toString();
-    let rng = 10 ** (strNum.length - 1);
-    while (rng > 0 && num > 0) {
-      console.log(parseInt(num / rng));
-      num -= rng * parseInt(num / rng);
-      rng = rng / 10;
+    const num = parseInt(prompt("enter a number to break:"));
+    let num_copy = num; //copy of the number so no changes to num.
+    let num_length = 0;
+    while (num_copy > 0) {
+      //getting the length of number -- using Eden's idea
+      num_length++;
+      num_copy = Math.floor(num_copy / 10);
+    }
+    let num_of_zeros = 10 ** (num_length - 1);
+    //if the number is hundreds => num_of_zeros will be 100. if the number is thousends => num_of_zeros will be 1,000
+    num_copy = num;
+    while (num_of_zeros > 0 && num_copy > 0) {
+      let left_number = parseInt(num_copy / num_of_zeros); //gets the left number => in 673, 673/100 = 6.
+      alert(left_number);
+      num_copy -= num_of_zeros * left_number; // removing the left number => in 673, 673-(00*6) = 73
+      num_of_zeros = num_of_zeros / 10; // getting ready for the next number => num_of_zeros now = 10
     }
   </script>
 </html>
