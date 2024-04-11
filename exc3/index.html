@@ -29,14 +29,18 @@
         let row = "";
         for (let j = 0; j < board.length; j++) {
           if (j < board.length - 1) {
-            row += board[i][j] + " | ";
+            row += board[i][j] + " ┃ ";
           } else {
             row += board[i][j];
           }
         }
         console.log(row);
+        if (i < board.length - 1) {
+          console.log("━━━".repeat(board.length));
+        }
       }
-      console.log("----".repeat(board.length));
+      console.log("");
+      console.log("");
     }
     function Is_Win_By_Culomn(culomn_index) {
       let boll = true;
@@ -128,6 +132,7 @@
           for (let j = 0; j < board.length; j++) {
             if (board[i][j] == place) {
               board[i][j] = player;
+              color();
               return true;
             }
           }
@@ -148,7 +153,21 @@
       }
       resultsPrompt = `results - X: ${countX}, O: ${countO}`;
     }
+    function color() {
+      for (let j = 0; j < board.length; j++) {
+        for (let i = 0; i < board.length; i++) {
+          if (board[j][i] == "X") {
+            board[j][i] = ("%c X", "color: green;");
+          } else if (board[j][i] == "O") {
+            board[j][i] = ("%c O", "color:red;");
+          }
+        }
+      }
+    }
     function run() {
+      let player1 = prompt("enter player1 name: ");
+      let player2 = prompt("enter player2 name: ");
+      let currentPlayer = player1;
       let game_loop = true;
       while (game_loop) {
         let count = 0;
@@ -164,11 +183,14 @@
         }
         let symbol = "X";
         while (check_can_play()) {
+          console.clear();
           print_board();
           if (count % 2 == 0) {
             symbol = "X";
+            currentPlayer = player1;
           } else {
             symbol = "O";
+            currentPlayer = player2;
           }
           place = prompt(`where do u want to put ${symbol}?`);
           while (true) {
@@ -186,8 +208,8 @@
           count++;
         }
         if (Is_Win()) {
-          console.log(`the winner is: ${symbol}!`);
-          results.push(symbol);
+          console.log(`the winner is: ${currentPlayer}!`);
+          results.push(currentPlayer);
         } else {
           console.log(`it's a tie`);
         }
