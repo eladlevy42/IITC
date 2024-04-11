@@ -9,7 +9,8 @@
 
   <script>
     let board = [];
-
+    let resultsPrompt = "";
+    let results = [];
     function Create_Board(num) {
       board = [];
       for (let i = 0; i < num; i++) {
@@ -25,8 +26,17 @@
     }
     function print_board() {
       for (let i = 0; i < board.length; i++) {
-        console.log(board[i]);
+        let row = "";
+        for (let j = 0; j < board.length; j++) {
+          if (j < board.length - 1) {
+            row += board[i][j] + " | ";
+          } else {
+            row += board[i][j];
+          }
+        }
+        console.log(row);
       }
+      console.log("----".repeat(board.length));
     }
     function Is_Win_By_Culomn(culomn_index) {
       let boll = true;
@@ -94,11 +104,10 @@
       return false;
     }
     function check_can_play() {
-      for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < board.length; j++) {
-          if (board[i][j] != "X" || board[i][j] != "O") {
-            return true;
-          }
+      let counter = 0;
+      for (let i = 1; i <= board.length ** 2; i++) {
+        if (check_can_place(i)) {
+          return true;
         }
       }
       return false;
@@ -127,46 +136,74 @@
         return false;
       }
     }
-
-    function run() {
-      let count = 0;
-      let place = "";
-      let board_size = prompt("enter board size: ");
-      while (true) {
-        if (isFinite(board_size)) {
-          Create_Board(board_size);
-          break;
-        } else {
-          board_size = prompt("enter valid board size: ");
+    function getResults() {
+      let countX = 0;
+      let countO = 0;
+      for (let i of results) {
+        if (i == "X") {
+          countX++;
+        } else if (i == "O") {
+          countO++;
         }
       }
-      let symbol = "X";
-      while (check_can_play()) {
-        print_board();
-        if (count % 2 == 0) {
-          symbol = "X";
-        } else {
-          symbol = "O";
-        }
-        place = prompt(`where do u want to put ${symbol}?`);
+      resultsPrompt = `results - X: ${countX}, O: ${countO}`;
+    }
+    function run() {
+      let game_loop = true;
+      while (game_loop) {
+        let count = 0;
+        let place = "";
+        let board_size = prompt("enter board size: ");
         while (true) {
-          if (check_can_place(place)) {
-            place_in_board(place, symbol);
+          if (isFinite(board_size)) {
+            Create_Board(board_size);
             break;
           } else {
-            place = prompt(`enter valid place on board:`);
+            board_size = prompt("enter valid board size: ");
           }
         }
-        if (Is_Win()) {
+        let symbol = "X";
+        while (check_can_play()) {
           print_board();
-          break;
+          if (count % 2 == 0) {
+            symbol = "X";
+          } else {
+            symbol = "O";
+          }
+          place = prompt(`where do u want to put ${symbol}?`);
+          while (true) {
+            if (check_can_place(place)) {
+              place_in_board(place, symbol);
+              break;
+            } else {
+              place = prompt(`enter valid place on board:`);
+            }
+          }
+          if (Is_Win() || !check_can_play()) {
+            print_board();
+            break;
+          }
+          count++;
         }
-        count++;
-      }
-      if (Is_Win()) {
-        console.log(`the winner is: ${symbol}!`);
-      } else {
-        console.log(`it's a tie`);
+        if (Is_Win()) {
+          console.log(`the winner is: ${symbol}!`);
+          results.push(symbol);
+        } else {
+          console.log(`it's a tie`);
+        }
+        getResults();
+        console.log(resultsPrompt);
+        let contin = prompt("do you want to continue playing? y/n");
+        while (true) {
+          if (contin == "n") {
+            game_loop = false;
+            break;
+          } else if (contin == "y") {
+            break;
+          } else {
+            contin = prompt("enter valid prompt! y/n");
+          }
+        }
       }
     }
     run();
