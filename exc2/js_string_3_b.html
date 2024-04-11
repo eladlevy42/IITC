@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // bot working
+    function longest_val(arr) {
+      let max = " ";
+      for (let i in arr) {
+        if (i.split(":")[1].length >= max.length) {
+          max = i.split(":")[1];
+        }
+      }
+      return max;
+    }
+    arr = ["name:nathan", "family:krasney", "city:haifa"];
+    console.log(longest_val(arr));
+  </script>
+</html>
