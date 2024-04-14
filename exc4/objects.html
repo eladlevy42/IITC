@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width= device-width, initial-scale=1.0" />
+    <title>JS Object</title>
+  </head>
+  <body>
+    <script>
+      const person = {
+        firstName: "John",
+        lastName: "Deer",
+        age: 33,
+      };
+      const person1 = {
+        firstName: "Jin",
+        lastName: "Deer",
+        age: 44,
+      };
+      const persons = [
+        person,
+        person1,
+        { firstName: "David", lastName: "Levy", age: 55 },
+      ];
+      function avgAge(arr) {
+        //1
+        let sum = 0;
+        for (let i of persons) {
+          sum += i.age;
+        }
+        return parseFloat(sum / arr.length);
+      }
+      function oldestPerson(arr) {
+        //2
+        let maxIndex = 0;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[maxIndex].age < arr[i].age) {
+            maxIndex = i;
+          }
+        }
+        return {
+          age: arr[maxIndex].age,
+          index: maxIndex,
+          firstName: arr[maxIndex].firstName,
+        };
+      }
+      console.log(oldestPerson(persons));
+    </script>
+  </body>
+</html>

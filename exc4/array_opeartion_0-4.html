@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const book1 = { name: "book1", pages: 42 };
+      const book2 = { name: "book2", pages: 23 };
+      const book3 = { name: "book3", pages: 57 };
+      const book4 = { name: "book5", pages: 660 };
+      const book5 = { name: "book5", pages: 120 };
+      arry_of_book = [book1, book2, book3, book4, book5];
+
+      function print_books(arr) {
+        // operation_0
+        for (let i of arr) {
+          console.log(`name of book: ${i.name}, pages: ${i.pages}`);
+        }
+      }
+      function addBook(arr, bookName, bookPgs) {
+        // operation_1
+        arr.push({ name: bookName, pages: bookPgs });
+        return arr;
+      }
+
+      function getBook(arr, bookName) {
+        // operation 2
+        for (let i of arr) {
+          if (i.name == bookName) {
+            return i;
+          }
+        }
+        return null;
+      }
+
+      function updateBookPage(arr, bookName, bookPgs) {
+        //operation 3
+        for (let i of arr) {
+          if (i.name == bookName) {
+            i.pages = bookPgs;
+            return i;
+          }
+        }
+        return null;
+      }
+
+      function deleteBook(arr, bookName) {
+        //operation 4
+        for (let i of arr) {
+          if (i.name == bookName) {
+            arr.pop(i);
+            return true;
+          }
+        }
+        return false;
+      }
+    </script>
+  </body>
+</html>
