@@ -153,7 +153,7 @@ function run() {
     let place = "";
     let board_size = prompt("enter board size: ");
     while (true) {
-      if (isFinite(board_size)) {
+      if (isFinite(board_size) && parseInt(board_size) > 1) {
         createBoard(board_size);
         break;
       } else {
