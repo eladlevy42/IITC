@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="input1">insert first number </label>
+    <input type="number" id="input1" />
+    <br />
+    <label for="input2">insert second number </label>
+    <input type="number" id="input2" /><br />
+    <button onclick="addNumbers()">+</button>
+    <button onclick="subNumbers()">-</button>
+    <button onclick="multNumbers()">*</button>
+    <button onclick="divNumbers()">/</button>
+    <label id="result"></label><br />
+    <button onclick="printTable()">Histroy</button><br />
+    <button onclick="resetTable()">Reset Histroy</button>
+    <table id="history">
+      <tr style="border: 1px solid black">
+        <th>num1</th>
+        <th>num2</th>
+        <th>operation</th>
+        <th>result</th>
+      </tr>
+    </table>
+  </body>
+  <script>
+    let history = [];
+    function addNumbers() {
+      const num1 = document.querySelector("#input1").valueAsNumber;
+      const num2 = document.querySelector("#input2").valueAsNumber;
+      const result = num1 + num2;
+      document.querySelector("#result").innerText = result;
+      history.push({ num1: num1, num2: num2, op: "add", result: result });
+    }
+    function multNumbers() {
+      const num1 = document.querySelector("#input1").valueAsNumber;
+      const num2 = document.querySelector("#input2").valueAsNumber;
+      const result = num1 * num2;
+      document.querySelector("#result").innerText = result;
+      history.push({ num1: num1, num2: num2, op: "multiply", result: result });
+    }
+    function divNumbers() {
+      const num1 = document.querySelector("#input1").valueAsNumber;
+      const num2 = document.querySelector("#input2").valueAsNumber;
+      const result = num1 / num2;
+      document.querySelector("#result").innerText = result;
+      history.push({ num1: num1, num2: num2, op: "divide", result: result });
+    }
+    function subNumbers() {
+      const num1 = document.querySelector("#input1").valueAsNumber;
+      const num2 = document.querySelector("#input2").valueAsNumber;
+      const result = num1 - num2;
+      document.querySelector("#result").innerText = result;
+      history.push({ num1: num1, num2: num2, op: "substract", result: result });
+    }
+    function resetTable() {
+      let historyElem = document.querySelector("#history");
+      historyElem.innerHTML =
+        "<tr><th>num1</th><th>num2</th><th>operation</th><th>result</th></tr>";
+    }
+    function printTable() {
+      if (history.length > 0) {
+        resetTable();
+        let historyElem = document.querySelector("#history");
+        historyElem.innerHTML += "<tr>";
+        for (let i of history) {
+          historyElem.innerHTML += `<td>${i.num1}</td><td>${i.num2}</td><td>${i.op}</td><td>${i.result}</td>`;
+        }
+        historyElem.innerHTML += "</tr>";
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="calc">
+        <div class="top">
+          <button id="Cbtn" onclick="eraseNumber()">C</button>
+          <label id="number">0</label>
+        </div>
+
+        <div class="boardWrapper">
+          <div class="numberWrapper">
+            <button class="boardbutton" onclick="getNumber('7')">7</button>
+            <button class="boardbutton" onclick="getNumber('8')">8</button>
+            <button class="boardbutton" onclick="getNumber('9')">9</button>
+            <button class="boardbutton" onclick="getNumber('4')">4</button>
+            <button class="boardbutton" onclick="getNumber('5')">5</button>
+            <button class="boardbutton" onclick="getNumber('6')">6</button>
+            <button class="boardbutton" onclick="getNumber('1')">1</button>
+            <button class="boardbutton" onclick="getNumber('2')">2</button>
+            <button class="boardbutton" onclick="getNumber('3')">3</button>
+            <button class="boardbutton" onclick="getNumber('0')">0</button>
+            <button class="boardbutton" onclick="getNumber('.')">.</button>
+            <button class="opBtn" onclick="printResult()">=</button>
+          </div>
+          <div class="buttonWrapper">
+            <button class="opBtn" id="/" onclick="getSymbol('/')">÷</button>
+            <button class="opBtn" id="*" onclick="getSymbol('*')">×</button>
+            <button class="opBtn" id="-" onclick="getSymbol('-')">-</button>
+            <button class="opBtn" id="+" onclick="getSymbol('+')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let num1 = 0;
+      let num2 = 0;
+      let count = 0;
+      let opSymbol = "";
+      let numberElem = document.querySelector("#number");
+      function eraseNumber() {
+        num1 = 0;
+        num2 = 0;
+        count = 0;
+        opSymbol = "";
+        numberElem.innerText = "0";
+      }
+      function printResult() {
+        num2 = parseFloat(numberElem.textContent);
+        numberElem.innerText = getResult();
+        num1 = 0;
+        num2 = 0;
+      }
+
+      function getResult() {
+        switch (opSymbol) {
+          case "+":
+            return num1 + num2;
+            break;
+          case "-":
+            return num1 - num2;
+            break;
+          case "/":
+            return num1 / num2;
+            break;
+          case "*":
+            return num1 * num2;
+            break;
+          default:
+            return "error";
+        }
+      }
+      function getSymbol(symbol) {
+        opSymbol = symbol;
+        if (num1 != 0) {
+          num2 = parseFloat(numberElem.textContent);
+          printResult();
+        } else {
+          num1 = parseFloat(numberElem.textContent);
+        }
+        numberElem.innerText = "0";
+      }
+
+      function getNumber(num) {
+        if (
+          numberElem.textContent == "0" ||
+          numberElem.textContent == getResult()
+        ) {
+          numberElem.textContent = num;
+        } else {
+          numberElem.textContent += num;
+        }
+      }
+    </script>
+  </body>
+</html>
