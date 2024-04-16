@@ -1,0 +1,52 @@
+html {
+  max-width: 100%;
+}
+body {
+  max-width: 100%;
+}
+.main {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+.topText {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+}
+.topText p,
+h1 {
+  text-align: center;
+}
+.numberWrapper {
+}
+.numbers {
+  border: 1px solid black;
+  width: 50%;
+  margin-inline: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+button {
+  height: 25px;
+  margin-block: auto;
+}
+.numberBlock {
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 4px;
+  text-align: center;
+}
