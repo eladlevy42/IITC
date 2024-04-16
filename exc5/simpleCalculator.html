@@ -45,20 +45,23 @@
       let count = 0;
       let opSymbol = "";
       let numberElem = document.querySelector("#number");
+      let countNum = 0;
       function eraseNumber() {
         num1 = 0;
         num2 = 0;
         count = 0;
         opSymbol = "";
         numberElem.innerText = "0";
+        lastResult = 0;
+        countNum = 0;
       }
       function printResult() {
-        num2 = parseFloat(numberElem.textContent);
+        if (countNum == 1) {
+          num2 = parseFloat(numberElem.textContent);
+        }
+        countNum = 0;
         numberElem.innerText = getResult();
-        num1 = 0;
-        num2 = 0;
       }
-
       function getResult() {
         switch (opSymbol) {
           case "+":
@@ -79,24 +82,31 @@
       }
       function getSymbol(symbol) {
         opSymbol = symbol;
-        if (num1 != 0) {
-          num2 = parseFloat(numberElem.textContent);
-          printResult();
-        } else {
+        countNum++;
+        if (countNum == 1) {
           num1 = parseFloat(numberElem.textContent);
-        }
-        numberElem.innerText = "0";
-      }
-
-      function getNumber(num) {
-        if (
-          numberElem.textContent == "0" ||
-          numberElem.textContent == getResult()
-        ) {
-          numberElem.textContent = num;
+          numberElem.innerText = "0";
+        } else if (countNum == 2) {
+          {
+            num2 = parseFloat(numberElem.textContent);
+            numberElem.innerText = "0";
+            lastResult = getResult();
+            num1 = lastResult;
+          }
         } else {
-          numberElem.textContent += num;
+          countNum = 0;
+          lastResult = getResult();
+          numberElem.innerText = "0";
         }
+        count = 0;
+      }
+      function getNumber(num) {
+        if (count == 0 || numberElem.textContent == getResult()) {
+          numberElem.innerText = num;
+        } else {
+          numberElem.innerText += num;
+        }
+        count++;
       }
     </script>
   </body>
