@@ -83,8 +83,9 @@
       let bulls = 0;
       let cows = 0;
       let userArr = ["1", "2", "3", "4"]; //default
+      // a function to generate a random array
       function createRandomArr() {
-        // a function to generate a random array
+        let dupCount = 0;
         let arr = [
           parseInt(Math.random() * 9),
           parseInt(Math.random() * 9),
@@ -92,12 +93,22 @@
           parseInt(Math.random() * 9),
         ];
         for (let i = 0; i < 4; i++) {
+          dupCount = 0; //reset for any number
           for (let j = 0; j < 4; j++) {
             if (arr[j] == arr[i] && i != j) {
+              //if there is duplicates
               while (true) {
+                //breaks only when a new none duplicate number is made.
                 let randomNum = parseInt(Math.random() * 9);
-                if (randomNum != arr[i]) {
-                  arr[i] = parseInt(Math.random() * 9);
+                for (let k of arr) {
+                  //checks if new number isnt a duplicate of all numbers
+                  if (randomNum == k) {
+                    dupCount++;
+                  }
+                }
+                if (dupCount == 0) {
+                  //if there are no duplicates
+                  arr[j] = parseInt(Math.random() * 9);
                   break;
                 }
               }
@@ -106,16 +117,19 @@
         }
         return arr;
       }
+      // a function that limits the length of the number
       function limitInputLength(id) {
         let valueOfId = document.querySelector(`#${id}`);
         if (valueOfId.value.length > 1) {
           valueOfId.value = valueOfId.value.slice(0, 1);
         }
       }
+      // a function that prints the results at the specific lables.
       function printResults() {
         document.querySelector(`#b${count}`).innerText = bulls;
         document.querySelector(`#c${count}`).innerText = cows;
       }
+      // a reset function for the "New Game" btn
       function reset() {
         targetArr = createRandomArr();
         count = 1;
@@ -148,6 +162,7 @@
         </div>
       `;
       }
+      // the main function for the 'Go' btn
       function Go(id) {
         for (let i = 0; i < 4; i++) {
           if (document.querySelector(`#r${id}n${i}`).value != "") {
@@ -155,28 +170,29 @@
           }
         }
         if (!checkDuplicate()) {
-          //if therre is any duplicates: dont do it
-          checkBullsCows();
+          checkBullsCows(); //check and update results
           document.querySelector(
             `#n${count}`
-          ).innerHTML = `<input type="number"  id="r${count}n0" class="numberBlock" placeholder="${userArr[0]}" oninput="limitInputLength('r${count}n0')" disabled /><input type="number"  id="r${count}n1"  class="numberBlock" placeholder="${userArr[1]}" oninput="limitInputLength('r${count}n1')" disabled /><input type="number"  id="r${count}n2" class="numberBlock" placeholder="${userArr[2]}" oninput="limitInputLength('r${count}n2')"disabled /><input type="number"  id="r${count}n3" oninput="limitInputLength('r${count}n0')" class="numberBlock" placeholder="${userArr[3]}" disabled/> <div class="smallWrapper"><div class="result" id="b${count}"></div><div class="result" id="c${count}"></div>`;
+          ).innerHTML = `<input type="number"  id="r${count}n0" class="numberBlock" placeholder="${userArr[0]}" oninput="limitInputLength('r${count}n0')" disabled /><input type="number"  id="r${count}n1"  class="numberBlock" placeholder="${userArr[1]}" oninput="limitInputLength('r${count}n1')" disabled /><input type="number"  id="r${count}n2" class="numberBlock" placeholder="${userArr[2]}" oninput="limitInputLength('r${count}n2')"disabled /><input type="number"  id="r${count}n3" oninput="limitInputLength('r${count}n0')" class="numberBlock" placeholder="${userArr[3]}" disabled/> <div class="smallWrapper"><div class="result" id="b${count}"></div><div class="result" id="c${count}"></div>`; //updates the current 'row' and disables it
           printResults();
           if (bulls == 4) {
+            //if win
             document.querySelector(
               "#numberWrapper"
             ).innerHTML += `<div class="numbers"> Well Done! <br/> it took you: ${count} tries</div>
-            `;
+            `; //adds message for winner
             document.querySelector(`#r${count}btn`).style.visibility = "hidden";
           } else {
             count++;
             document.querySelector(
               "#numberWrapper"
-            ).innerHTML += `<div class="numbers"id = 'n${count}'><input type="number"  id="r${count}n0" class="numberBlock" placeholder="${userArr[0]}" oninput="limitInputLength('r${count}n0')"  /><input type="number"  id="r${count}n1"  class="numberBlock" placeholder="${userArr[1]}" oninput="limitInputLength('r${count}n1')"  /><input type="number"  id="r${count}n2" class="numberBlock" placeholder="${userArr[2]}" oninput="limitInputLength('r${count}n2')" /><input type="number"  id="r${count}n3" oninput="limitInputLength('r${count}n3')" class="numberBlock" placeholder="${userArr[3]}" /> <div class="smallWrapper"><div class="result" id="b${count}"></div><button id="r${count}btn" onclick="Go(${count})">Go</button><div class="result" id="c${count}"></div></div>`;
+            ).innerHTML += `<div class="numbers"id = 'n${count}'><input type="number"  id="r${count}n0" class="numberBlock" placeholder="${userArr[0]}" oninput="limitInputLength('r${count}n0')"  /><input type="number"  id="r${count}n1"  class="numberBlock" placeholder="${userArr[1]}" oninput="limitInputLength('r${count}n1')"  /><input type="number"  id="r${count}n2" class="numberBlock" placeholder="${userArr[2]}" oninput="limitInputLength('r${count}n2')" /><input type="number"  id="r${count}n3" oninput="limitInputLength('r${count}n3')" class="numberBlock" placeholder="${userArr[3]}" /> <div class="smallWrapper"><div class="result" id="b${count}"></div><button id="r${count}btn" onclick="Go(${count})">Go</button><div class="result" id="c${count}"></div></div>`; //creates another try-row
           }
         } else {
-          document.querySelector(`#c${count}`).innerText = "Duplicate!";
+          document.querySelector(`#c${count}`).innerText = "Duplicate!"; //message about duplicates
         }
       }
+      // a function that returns true if there is duplicates in the array
       function checkDuplicate() {
         for (let i in userArr) {
           for (let j in userArr)
@@ -186,6 +202,7 @@
         }
         return false;
       }
+      // a function that shows the user the number when pressing the 'Give Up' btn
       function giveUp() {
         document.querySelector(
           "#numberWrapper"
@@ -199,15 +216,18 @@
             <div class="result">Cows</div>
           </div>`;
       }
+      // a function that updates the value of bulls and cows
       function checkBullsCows() {
-        bulls = 0;
+        bulls = 0; //resets the global argument
         cows = 0;
         for (let i in userArr) {
           for (let j in targetArr) {
             if (j != i && targetArr[j] == userArr[i]) {
+              //if the value is correct but placing isnt
               cows++;
             }
             if (j == i && targetArr[j] == userArr[i]) {
+              // if both place and value is correct
               bulls++;
             }
           }
