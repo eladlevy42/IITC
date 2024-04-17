@@ -1,23 +1,29 @@
 html {
   width: 100%;
+  height: 100%;
 }
 .main {
   width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
 }
 .body {
   width: 100%;
+  height: 100%;
 }
 .boardWrapper {
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-around;
 }
 .square {
   border: 1px solid black;
   width: 90px;
   height: 160px;
+  background-color: #3d2f94;
 }
 img {
   border: 1px solid black;

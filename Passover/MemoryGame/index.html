@@ -10,8 +10,8 @@
     <div class="main">
       <div class="boardWrapper">
         <div class="top">
-          <label id="mistakes"></label>
-          <label id="moves"></label>
+          <label id="mistakes">Mistakes:</label>
+          <label id="moves">Moves:</label>
         </div>
         <div id="board">
           <div class="card" id="card1">
@@ -125,38 +125,71 @@
           document.querySelector(`#p${i.id2}`).style.display = "none";
         }
       }
-
+      function updateMoveMis() {
+        document.querySelector("#moves").textContent = "Moves: " + moves;
+        document.querySelector("#mistakes").textContent =
+          "Mistakes: " + mistakes;
+      }
       function revealPic(pictureId) {
         opnCardCount++;
         if (opnCardCount == 1) {
           //if only one card open:
           opnCardId1 = pictureId;
-          alert("opnCardId1:" + opnCardId1);
+
           document.querySelector(`#s${pictureId}`).style.display = "none";
           document.querySelector(`#p${pictureId}`).style.display = "block";
-        }
-        if (opnCardCount == 2) {
+        } else if (opnCardCount == 2) {
           opnCardId2 = pictureId;
-          //alert("opnCardId1:" + opnCardId1 + "opnCardId2:" + opnCardId2);
           if (opnCardId1 == opnCardId2) {
-            console.log("tha fuck u doin");
-            return null;
+            //won't happen
           }
           document.querySelector(`#s${opnCardId2}`).style.display = "none";
           document.querySelector(`#p${opnCardId2}`).style.display = "block";
           ///check both cards are the same pic
           moves++;
           if (!checkSamePic()) {
+            disableAllButtons();
             setTimeout(flipSquares, 1000); //flip the squares but wait 1 seconds
+
+            mistakes++;
+          } else if (checkWin()) {
+            alert("you won!");
           }
+          updateMoveMis();
           opnCardCount = 0;
         }
+      }
+      function disableAllButtons() {
+        let sqLst = document.querySelectorAll(".square");
+        for (let i of sqLst) {
+          i.onclick = "";
+        }
+      }
+      function enableAllButtons() {
+        let sqLst = document.querySelectorAll(".square");
+        for (let i = 1; i <= sqLst.length; i++) {
+          sqLst[i - 1].onclick = function () {
+            revealPic(i);
+          };
+        }
+      }
+      function checkWin() {
+        let sqLst = document.querySelectorAll(".square");
+        for (let i = 1; i <= sqLst.length; i++) {
+          if (sqLst[i - 1].style.display == "block") {
+            return false;
+          }
+        }
+
+        return true;
       }
       function flipSquares() {
         document.querySelector(`#s${opnCardId1}`).style.display = "block";
         document.querySelector(`#p${opnCardId1}`).style.display = "none";
         document.querySelector(`#s${opnCardId2}`).style.display = "block";
         document.querySelector(`#p${opnCardId2}`).style.display = "none";
+        enableAllButtons();
+        // enableAllButtons();
       }
       function checkSamePic() {
         for (let i of objArr) {
