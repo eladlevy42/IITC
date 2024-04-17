@@ -4,6 +4,88 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <div class="main">
+      <div class="boardWrapper">
+        <div class="top">
+          <label id="mistakes"></label>
+          <label id="moves"></label>
+        </div>
+        <div id="board">
+          <div class="card" id="1"><div class="square" id="s1"></div></div>
+          <div class="card" id="2"><div class="square" id="s2"></div></div>
+          <div class="card" id="3"><div class="square" id="s3"></div></div>
+          <div class="card" id="4"><div class="square" id="s4"></div></div>
+          <div class="card" id="5"><div class="square" id="s5"></div></div>
+          <div class="card" id="6"><div class="square" id="s6"></div></div>
+          <div class="card" id="7"><div class="square" id="s7"></div></div>
+          <div class="card" id="8"><div class="square" id="s8"></div></div>
+          <div class="card" id="9"><div class="square" id="s9"></div></div>
+          <div class="card" id="10"><div class="square" id="s10"></div></div>
+          <div class="card" id="11"><div class="square" id="s11"></div></div>
+          <div class="card" id="12"><div class="square" id="s12"></div></div>
+          <div class="card" id="13"><div class="square" id="s13"></div></div>
+          <div class="card" id="14"><div class="square" id="s14"></div></div>
+          <div class="card" id="15"><div class="square" id="s15"></div></div>
+          <div class="card" id="16"><div class="square" id="s16"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let objArr = createObjArr(); // an arrey of 2 square ids and 1 picture id
+      function createObjArr() {
+        let rndArr = [];
+        let rndPicArr = [];
+        let rndCount = 0;
+        let rnd1 = 0;
+        let rnd2 = 0;
+        let rndPicId = 0;
+        let funResultArr = [];
+        let i = 1;
+        for (let i = 0; i < 8; i++) {
+          //loop that adds a number of the picture in random order to an array
+          while (true) {
+            rndPicId = Math.floor(Math.random(1) * 8) + 1;
+            if (rndPicArr.find((element) => element == rndPicId) == undefined) {
+              rndPicArr.push(rndPicId);
+              break;
+            }
+          }
+          while (true) {
+            rnd1 = Math.floor(Math.random(1) * 16) + 1;
+            if (rndArr.find((j) => j == rnd1) == undefined) {
+              rndArr.push(rnd1);
+              break;
+            }
+          }
+          while (true) {
+            rnd2 = Math.floor(Math.random(1) * 16) + 1;
+            if (rndArr.find((i) => i == rnd2) == undefined) {
+              rndArr.push(rnd2);
+              break;
+            }
+          }
+          funResultArr.push({ id1: rnd1, id2: rnd2, picId: rndPicId });
+        }
+        console.log(funResultArr);
+        return funResultArr;
+      }
+      function givePicToId() {
+        for (let i of objArr) {
+          //i = { id1: rnd1, id2: rnd2, picId: rndPicId }
+          document.querySelector(
+            `#${i.id1}`
+          ).innerHTML += `<img id = "p${i.Id1}" src="/pictures/${i.picId}" visibility='hidden'>`;
+          document.querySelector(
+            `#${i.id2}`
+          ).innerHTML += `<img id = "p${i.Id2}" src="/pictures/${i.picId} visibility='hidden'">`;
+        }
+      }
+
+      function revealPic(pictureId) {}
+    </script>
+  </body>
 </html>
