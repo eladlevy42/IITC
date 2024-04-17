@@ -12,10 +12,10 @@
       <div class="topText">
         <h1>Bulls and Cows</h1>
         <p>
-          Discover the hidden code! Click, or use arrow keys, to change your
-          guess in each box. (Bulls and Cows is similar to, but came before, the
-          board game MastermindTM*) Bulls = correct code, correct position. Cows
-          = correct code, wrong position.
+          Discover the hidden code!<br />
+          Click, or use arrow keys, to change your guess in each box.<br />
+          Bulls = correct code, correct position.<br />
+          Cows = correct code, wrong position.
         </p>
       </div>
       <div id="numberWrapper">
@@ -24,28 +24,67 @@
           <div class="numberBlock">?</div>
           <div class="numberBlock">?</div>
           <div class="numberBlock">?</div>
-          <div class="result">Bulls</div>
-          <div class="result">Cows</div>
+          <div class="smallWrapper">
+            <div class="result">Bulls</div>
+            <div class="result">Cows</div>
+          </div>
         </div>
-        <div class="numbers">
-          <input type="number" id="r1n0" class="numberBlock" placeholder="1" />
-          <input type="number" id="r1n1" class="numberBlock" placeholder="2" />
-          <input type="number" id="r1n2" class="numberBlock" placeholder="3" />
-          <input type="number" id="r1n3" class="numberBlock" placeholder="4" />
-          <div class="result" id="b1"></div>
-          <button id="r1btn" onclick="Go(1)">Go</button>
-          <div class="result" id="c1"></div>
+        <div class="numbers" id="n1">
+          <input
+            type="number"
+            id="r1n0"
+            class="numberBlock"
+            placeholder="1"
+            oninput="limitInputLength('r1n0')"
+          />
+          <input
+            type="number"
+            id="r1n1"
+            class="numberBlock"
+            placeholder="2"
+            oninput="limitInputLength('r1n1')"
+          />
+          <input
+            type="number"
+            id="r1n2"
+            class="numberBlock"
+            placeholder="3"
+            oninput="limitInputLength('r1n2')"
+          />
+          <input
+            type="number"
+            id="r1n3"
+            class="numberBlock"
+            oninput="limitInputLength('r1n3')"
+            placeholder="4"
+          />
+          <div class="smallWrapper">
+            <div class="result" id="b1"></div>
+            <button id="r1btn" onclick="Go(1)">Go</button>
+            <div class="result" id="c1"></div>
+          </div>
         </div>
       </div>
+      <div class="buttons">
+        <button onclick="reset()">New Game</button
+        ><button onclick="giveUp()">Give Up</button>
+      </div>
     </div>
+    <!-- 
+מה שנשאר לעשות -
+לדאוג שלא יהיה אפשר להכניס יותר מאחד.
+לדאוג שלא אפס אחרי שהוא שלח טעות!
+
+ -->
 
     <script>
       let targetArr = createRandomArr();
       let count = 1;
       let bulls = 0;
       let cows = 0;
-      let userArr = [];
+      let userArr = ["1", "2", "3", "4"]; //default
       function createRandomArr() {
+        // a function to generate a random array
         let arr = [
           parseInt(Math.random() * 9),
           parseInt(Math.random() * 9),
@@ -67,34 +106,75 @@
         }
         return arr;
       }
-
+      function limitInputLength(id) {
+        let valueOfId = document.querySelector(`#${id}`);
+        if (valueOfId.value.length > 1) {
+          valueOfId.value = valueOfId.value.slice(0, 1);
+        }
+      }
+      function printResults() {
+        document.querySelector(`#b${count}`).innerText = bulls;
+        document.querySelector(`#c${count}`).innerText = cows;
+      }
+      function reset() {
+        targetArr = createRandomArr();
+        count = 1;
+        bulls = 0;
+        cows = 0;
+        userArr = ["1", "2", "3", "4"]; //default
+        document.querySelector("#numberWrapper").innerHTML = `
+        <div id="randomNumbers" class="numbers">
+          <div class="numberBlock">?</div>
+          <div class="numberBlock">?</div>
+          <div class="numberBlock">?</div>
+          <div class="numberBlock">?</div>
+          <div class="smallWrapper">
+            <div class="result">Bulls</div>
+            <div class="result">Cows</div>
+          </div>
+        </div>
+        <div class="numbers" id="n1">
+          <input
+            type="number" maxlength="1" id="r1n0"class="numberBlock"placeholder="1"
+          />
+          <input type="number" id="r1n1" class="numberBlock" placeholder="2" />
+          <input type="number" id="r1n2" class="numberBlock" placeholder="3" />
+          <input type="number" id="r1n3" class="numberBlock" placeholder="4" />
+          <div class="smallWrapper">
+            <div class="result" id="b1"></div>
+            <button id="r1btn" onclick="Go(${count})">Go</button>
+            <div class="result" id="c1"></div>
+          </div>
+        </div>
+      `;
+      }
       function Go(id) {
-        alert(targetArr);
         for (let i = 0; i < 4; i++) {
-          if (isNaN(document.querySelector(`#r${id}n${i}`).valueAsNumber)) {
-            userArr[i] = i + 1;
-          } else {
+          if (document.querySelector(`#r${id}n${i}`).value != "") {
             userArr[i] = document.querySelector(`#r${id}n${i}`).value;
           }
         }
-        alert(userArr);
         if (!checkDuplicate()) {
+          //if therre is any duplicates: dont do it
           checkBullsCows();
+          document.querySelector(
+            `#n${count}`
+          ).innerHTML = `<input type="number"  id="r${count}n0" class="numberBlock" placeholder="${userArr[0]}" oninput="limitInputLength('r${count}n0')" disabled /><input type="number"  id="r${count}n1"  class="numberBlock" placeholder="${userArr[1]}" oninput="limitInputLength('r${count}n1')" disabled /><input type="number"  id="r${count}n2" class="numberBlock" placeholder="${userArr[2]}" oninput="limitInputLength('r${count}n2')"disabled /><input type="number"  id="r${count}n3" oninput="limitInputLength('r${count}n0')" class="numberBlock" placeholder="${userArr[3]}" disabled/> <div class="smallWrapper"><div class="result" id="b${count}"></div><div class="result" id="c${count}"></div>`;
+          printResults();
           if (bulls == 4) {
-            document.querySelector("#numberWrapper").innerHTML +=
-              '<div class="numbers"> Well Done! </div>';
-            document.querySelector(`#r${count}btn`).style.visibility = "hidden";
-          } else {
-            document.querySelector(`#r${count}btn`).style.visibility = "hidden";
-
-            count++;
-            alert(count);
             document.querySelector(
               "#numberWrapper"
-            ).innerHTML += `<div class="numbers"><input type="number"  id="r${count}n0" class="numberBlock" placeholder="${userArr[0]}" /><input type="number"  id="r${count}n1" class="numberBlock" placeholder="${userArr[1]}" /><input type="number"  id="r${count}n2" class="numberBlock" placeholder="${userArr[2]}" /><input type="number"  id="r${count}n3" class="numberBlock" placeholder="${userArr[3]}" /><div class="result" id="b${count}"></div><button id="r${count}btn" onclick="Go(${count})">Go</button><div class="result" id="c${count}"></div>`;
+            ).innerHTML += `<div class="numbers"> Well Done! <br/> it took you: ${count} tries</div>
+            `;
+            document.querySelector(`#r${count}btn`).style.visibility = "hidden";
+          } else {
+            count++;
+            document.querySelector(
+              "#numberWrapper"
+            ).innerHTML += `<div class="numbers"id = 'n${count}'><input type="number"  id="r${count}n0" class="numberBlock" placeholder="${userArr[0]}" oninput="limitInputLength('r${count}n0')"  /><input type="number"  id="r${count}n1"  class="numberBlock" placeholder="${userArr[1]}" oninput="limitInputLength('r${count}n1')"  /><input type="number"  id="r${count}n2" class="numberBlock" placeholder="${userArr[2]}" oninput="limitInputLength('r${count}n2')" /><input type="number"  id="r${count}n3" oninput="limitInputLength('r${count}n3')" class="numberBlock" placeholder="${userArr[3]}" /> <div class="smallWrapper"><div class="result" id="b${count}"></div><button id="r${count}btn" onclick="Go(${count})">Go</button><div class="result" id="c${count}"></div></div>`;
           }
         } else {
-          alert("duplicates are not allowed! try again");
+          document.querySelector(`#c${count}`).innerText = "Duplicate!";
         }
       }
       function checkDuplicate() {
@@ -106,7 +186,19 @@
         }
         return false;
       }
-
+      function giveUp() {
+        document.querySelector(
+          "#numberWrapper"
+        ).innerHTML = `<div id="randomNumbers" class="numbers">
+          <div class="numberBlock">${targetArr[0]}</div>
+          <div class="numberBlock">${targetArr[1]}</div>
+          <div class="numberBlock">${targetArr[2]}</div>
+          <div class="numberBlock">${targetArr[3]}</div>
+          <div class="smallWrapper">
+            <div class="result">Bulls</div>
+            <div class="result">Cows</div>
+          </div>`;
+      }
       function checkBullsCows() {
         bulls = 0;
         cows = 0;
@@ -120,8 +212,6 @@
             }
           }
         }
-        document.querySelector(`#b${count}`).innerText = bulls;
-        document.querySelector(`#c${count}`).innerText = cows;
       }
     </script>
   </body>

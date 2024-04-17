@@ -21,7 +21,18 @@ body {
 h1 {
   text-align: center;
 }
-.numberWrapper {
+.result {
+  padding-block: 1px;
+}
+.bigWrapper {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+.smallWrapper {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
 }
 .numbers {
   border: 1px solid black;
@@ -32,7 +43,18 @@ h1 {
   display: flex;
   justify-content: space-around;
 }
-
+.buttons {
+  border: 1px solid black;
+  width: 50%;
+  margin-inline: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+.buttons button {
+  margin: 4px;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
