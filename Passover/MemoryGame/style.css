@@ -47,6 +47,12 @@ body {
   justify-content: CENTER;
   margin-top: 5px;
 }
+#err {
+  text-align: center;
+}
+.inputSize {
+  margin: 15px;
+}
 .card {
   width: 90px;
   height: 90px;
