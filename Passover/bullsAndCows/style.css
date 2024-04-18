@@ -10,19 +10,57 @@ body {
   flex-direction: column;
   justify-items: center;
 }
-.topText {
-  display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
-  width: auto;
-}
-.topText p,
-h1 {
+button {
+  display: inline-block;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
   text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+.topText {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px; 
+}
+
+
+.topText h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #333; 
+}
+
+
+.topText p {
+  font-size: 16px;
+  color: #666; 
+  margin-bottom: 0; 
 }
 .result {
-  padding-block: 1px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+
+  border-radius: 5px;
 }
 .bigWrapper {
   width: 80%;
@@ -35,13 +73,13 @@ h1 {
   justify-content: space-between;
 }
 .numbers {
-  border: 1px solid black;
-  width: 50%;
-  margin-inline: 15px;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px; 
+  background-color: #f0f0f0; 
+  border: 2px solid #4caf50; 
+  border-radius: 5px;
 }
 .buttons {
   border: 1px solid black;
@@ -60,15 +98,20 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-button {
-  height: 25px;
-  margin-block: auto;
-}
+
 .numberBlock {
-  width: 25px;
-  height: 25px;
-  border: 1px solid black;
-  padding: 5px;
-  margin: 4px;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px; 
+  font-size: 24px;
   text-align: center;
+  color: #333; 
+  background-color: #fff;
+  border: 2px solid #4caf50;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
 }
+.numberBlock:hover {
+  background-color: #f0f0f0; 
