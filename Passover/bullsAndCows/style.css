@@ -31,7 +31,6 @@ button:hover {
   transform: translateY(-2px);
 }
 
-
 button:active {
   transform: translateY(1px);
   box-shadow: none;
@@ -39,21 +38,19 @@ button:active {
 .topText {
   text-align: center;
   font-family: Arial, sans-serif;
-  padding: 20px; 
+  padding: 20px;
 }
-
 
 .topText h1 {
   font-size: 36px;
   margin-bottom: 10px;
-  color: #333; 
+  color: #333;
 }
-
 
 .topText p {
   font-size: 16px;
-  color: #666; 
-  margin-bottom: 0; 
+  color: #666;
+  margin-bottom: 0;
 }
 .result {
   padding: 8px 16px;
@@ -76,9 +73,9 @@ button:active {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px; 
-  background-color: #f0f0f0; 
-  border: 2px solid #4caf50; 
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 2px solid #4caf50;
   border-radius: 5px;
 }
 .buttons {
@@ -103,10 +100,10 @@ input::-webkit-inner-spin-button {
   display: inline-block;
   width: 50px;
   height: 50px;
-  line-height: 50px; 
+  line-height: 50px;
   font-size: 24px;
   text-align: center;
-  color: #333; 
+  color: #333;
   background-color: #fff;
   border: 2px solid #4caf50;
   border-radius: 5px;
@@ -114,4 +111,5 @@ input::-webkit-inner-spin-button {
   transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 .numberBlock:hover {
-  background-color: #f0f0f0; 
+  background-color: #f0f0f0;
+}
