@@ -10,8 +10,8 @@
     <div class="main">
       <div class="boardWrapper">
         <div class="top">
-          <label id="mistakes">Mistakes:</label>
-          <label id="moves">Moves:</label>
+          <label id="mistakes">Mistakes: 0</label>
+          <label id="moves">Moves: 0</label>
         </div>
         <div id="board">
           <div class="card" id="card1">
@@ -63,6 +63,7 @@
             <button class="square" id="s16" onclick="revealPic(16)"></button>
           </div>
         </div>
+        <button class="reset" onclick="reset()">reset</button>
       </div>
     </div>
 
@@ -74,6 +75,7 @@
       let opnCardId2;
       let mistakes = 0;
       let moves = 0;
+      let score = 0;
       function createObjArr() {
         let rndArr = [];
         let rndPicArr = [];
@@ -150,14 +152,82 @@
           if (!checkSamePic()) {
             disableAllButtons();
             setTimeout(flipSquares, 1000); //flip the squares but wait 1 seconds
-
             mistakes++;
-          } else if (checkWin()) {
-            alert("you won!");
+          } else {
+            score++;
+            console.log(score);
+            if (score == 8) {
+              setTimeout(alert("you win!"), 2000);
+            }
           }
+
           updateMoveMis();
           opnCardCount = 0;
         }
+      }
+      function reset() {
+        for (let i = 1; i <= 16; i++) {
+          document.querySelector(`#s${i}`).style.display = "block";
+          document.querySelector(`#p${i}`).style.display = "none";
+        }
+        document.querySelector(
+          "#board"
+        ).innerHTML = `<div class="card" id="card1">
+            <button class="square" id="s1" onclick="revealPic(1)"></button>
+          </div>
+          <div class="card" id="card2">
+            <button class="square" id="s2" onclick="revealPic(2)"></button>
+          </div>
+          <div class="card" id="card3">
+            <button class="square" id="s3" onclick="revealPic(3)"></button>
+          </div>
+          <div class="card" id="card4">
+            <button class="square" id="s4" onclick="revealPic(4)"></button>
+          </div>
+          <div class="card" id="card5">
+            <button class="square" id="s5" onclick="revealPic(5)"></button>
+          </div>
+          <div class="card" id="card6">
+            <button class="square" id="s6" onclick="revealPic(6)"></button>
+          </div>
+          <div class="card" id="card7">
+            <button class="square" id="s7" onclick="revealPic(7)"></button>
+          </div>
+          <div class="card" id="card8">
+            <button class="square" id="s8" onclick="revealPic(8)"></button>
+          </div>
+          <div class="card" id="card9">
+            <button class="square" id="s9" onclick="revealPic(9)"></button>
+          </div>
+          <div class="card" id="card10">
+            <button class="square" id="s10" onclick="revealPic(10)"></button>
+          </div>
+          <div class="card" id="card11">
+            <button class="square" id="s11" onclick="revealPic(11)"></button>
+          </div>
+          <div class="card" id="card12">
+            <button class="square" id="s12" onclick="revealPic(12)"></button>
+          </div>
+          <div class="card" id="card13">
+            <button class="square" id="s13" onclick="revealPic(13)"></button>
+          </div>
+          <div class="card" id="card14">
+            <button class="square" id="s14" onclick="revealPic(14)"></button>
+          </div>
+          <div class="card" id="card15">
+            <button class="square" id="s15" onclick="revealPic(15)"></button>
+          </div>
+          <div class="card" id="card16">
+            <button class="square" id="s16" onclick="revealPic(16)"></button>
+          </div>`;
+        objArr = createObjArr(); // an arrey of 2 square ids and 1 picture id
+        givePicToId();
+        opnCardCount = 0;
+        opnCardId1;
+        opnCardId2;
+        mistakes = 0;
+        moves = 0;
+        updateMoveMis();
       }
       function disableAllButtons() {
         let sqLst = document.querySelectorAll(".square");
@@ -173,16 +243,7 @@
           };
         }
       }
-      function checkWin() {
-        let sqLst = document.querySelectorAll(".square");
-        for (let i = 1; i <= sqLst.length; i++) {
-          if (sqLst[i - 1].style.display == "block") {
-            return false;
-          }
-        }
 
-        return true;
-      }
       function flipSquares() {
         document.querySelector(`#s${opnCardId1}`).style.display = "block";
         document.querySelector(`#p${opnCardId1}`).style.display = "none";
