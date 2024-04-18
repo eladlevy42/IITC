@@ -3,6 +3,8 @@ html {
 }
 body {
   max-width: 100%;
+  font-family: Arial, sans-serif;
+  padding: 20px;
 }
 .main {
   max-width: 100%;
@@ -71,7 +73,7 @@ button:active {
 }
 .numbers {
   display: flex;
-  align-items: center;
+  justify-items: center;
   justify-content: space-between;
   padding: 10px;
   background-color: #f0f0f0;
@@ -79,7 +81,6 @@ button:active {
   border-radius: 5px;
 }
 .buttons {
-  border: 1px solid black;
   width: 50%;
   margin-inline: 15px;
   margin-left: auto;
@@ -112,4 +113,15 @@ input::-webkit-inner-spin-button {
 }
 .numberBlock:hover {
   background-color: #f0f0f0;
+}
+#numberWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 50%;
+}
+#wellDone {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }

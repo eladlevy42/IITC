@@ -70,15 +70,10 @@
         ><button onclick="giveUp()">Give Up</button>
       </div>
     </div>
-    <!-- 
-מה שנשאר לעשות -
-לדאוג שלא יהיה אפשר להכניס יותר מאחד.
-לדאוג שלא אפס אחרי שהוא שלח טעות!
-
- -->
 
     <script>
       let targetArr = createRandomArr();
+
       let count = 1;
       let bulls = 0;
       let cows = 0;
@@ -115,6 +110,7 @@
             }
           }
         }
+        console.log(arr);
         return arr;
       }
       // a function that limits the length of the number
@@ -179,9 +175,8 @@
             //if win
             document.querySelector(
               "#numberWrapper"
-            ).innerHTML += `<div class="numbers"> Well Done! <br/> it took you: ${count} tries</div>
+            ).innerHTML += `<div class="numbers" ><div id='wellDone' > Well Done! <br/> it took you: ${count} tries</div></div>
             `; //adds message for winner
-            document.querySelector(`#r${count}btn`).style.visibility = "hidden";
           } else {
             count++;
             document.querySelector(
