@@ -107,7 +107,8 @@
           document.querySelector(`#s${i}`).style.display = "none";
         }
         givePicToCard();
-        setTimeout(hideCards, 3000); //hide the cars after 3 seconds
+        setTimeout(hideCards, 1000 * (sizeGivenByUser / 2));
+        //hide the cars after a number of seconds(depends on size of board)
       }
       function createCardsGroupArr() {
         // to match cards couples and add them the same img, i used an object with first card id,
