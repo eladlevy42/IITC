@@ -12,7 +12,8 @@
         <h1>CARS MEMORY GAME</h1>
         <div class="top">
           <label id="mistakes">MISTAKES: 0</label
-          ><label id="win" style="display: none">You Win!</label>
+          ><label id="timer">Timer: 00:00</label>
+          <label id="win" style="display: none">You Win!</label>
           <label id="moves">MOVES: 0</label>
         </div>
         <div id="board"></div>
@@ -42,63 +43,133 @@
     </div>
 
     <script>
-      let objArr;
+      let CardsGroupArr;
       let opnCardCount = 0;
       let opnCardId1;
       let opnCardId2;
       let mistakes = 0;
       let moves = 0;
       let score = 0;
-      let sizeOfBoard = 4;
-      function createObjArr() {
-        let rndArr = [];
-        let rndPicArr = [];
-        let rndCount = 0;
-        let rnd1 = 0;
-        let rnd2 = 0;
+      let numOfCards = 4;
+      let startTime;
+      let timerInterval;
+
+      //timer functions
+      ///////////////////////////
+      function startTimer() {
+        startTime = Date.now();
+        timerInterval = setInterval(updateTimer, 1000); // Update timer every second
+      }
+      function updateTimer() {
+        const elapsedTime = Date.now() - startTime;
+        const minutes = Math.floor(elapsedTime / 60000);
+        const seconds = Math.floor((elapsedTime % 60000) / 1000);
+        const formattedTime = padNumber(minutes) + ":" + padNumber(seconds);
+        document.getElementById("timer").textContent =
+          "Timer: " + formattedTime;
+      }
+
+      function padNumber(number) {
+        return (number < 10 ? "0" : "") + number; // Add leading zero if needed
+      }
+      function stopTimer() {
+        clearInterval(timerInterval);
+      }
+      /////////////////////////////
+      ///game functions
+      /////////////////////////////
+      function createBoard(sizeGivenByUser) {
+        // a function that gets a number and create a board based on that number
+        opnCardCount = 0;
+        opnCardId1;
+        opnCardId2;
+        mistakes = 0;
+        moves = 0;
+        score = 0;
+        //creating the board as grid in css and tell them whats the size of it
+        document.querySelector("#board").style.gridTemplateColumns =
+          "repeat(" + sizeGivenByUser + ", 90px)";
+        document.querySelector("#lblSize").style.display = "none";
+        document.querySelector("#bSize6").style.display = "none";
+        document.querySelector("#bSize2").style.display = "none";
+        document.querySelector("#bSize4").style.display = "none";
+        document.querySelector("#NGbtn").style.display = "block";
+        //the number of cards is the size*size (4x4 board = 16 cards)
+        numOfCards = sizeGivenByUser * sizeGivenByUser;
+        CardsGroupArr = createCardsGroupArr(); // an arrey of 2 square ids and 1 picture id
+        for (let i = 1; i <= numOfCards; i++) {
+          document.querySelector(
+            "#board"
+          ).innerHTML += `<div class="card" id="card${i}">
+            <button class="square" id="s${i}" onclick="revealPic(${i})"></button>
+          </div>`;
+          //hides the card at the first (first 3 seconds are revealed)
+          document.querySelector(`#s${i}`).style.display = "none";
+        }
+        givePicToCard();
+        setTimeout(hideCards, 3000); //hide the cars after 3 seconds
+      }
+      function createCardsGroupArr() {
+        // to match cards couples and add them the same img, i used an object with first card id,
+        //second card id, and picture id.
+        //to check that i didnt use any number twice, i added them to arrays - picture id array and
+        //card Id array.
+        let cardIdArr = [];
+        let picIdArr = [];
+        let rndCardId1 = 0;
+        let rndCardId2 = 0;
         let rndPicId = 0;
         let funResultArr = [];
-        let i = 1;
-        for (let i = 0; i < sizeOfBoard / 2; i++) {
-          //loop that adds a number of the picture in random order to an array
+        // a loop for inserting objects to the returned array
+        for (let i = 0; i < numOfCards / 2; i++) {
+          //choosing random pictureId and validates its not duplicate
           while (true) {
-            rndPicId = Math.floor(Math.random(1) * (sizeOfBoard / 2)) + 1;
-            if (rndPicArr.find((element) => element == rndPicId) == undefined) {
-              rndPicArr.push(rndPicId);
+            rndPicId = Math.floor(Math.random(1) * (numOfCards / 2)) + 1;
+            if (picIdArr.find((element) => element == rndPicId) == undefined) {
+              picIdArr.push(rndPicId);
               break;
             }
           }
+          //choosing first random cardId and validates its not duplicate
           while (true) {
-            rnd1 = Math.floor(Math.random(1) * sizeOfBoard) + 1;
-            if (rndArr.find((j) => j == rnd1) == undefined) {
-              rndArr.push(rnd1);
+            rndCardId1 = Math.floor(Math.random(1) * numOfCards) + 1;
+            if (cardIdArr.find((j) => j == rndCardId1) == undefined) {
+              cardIdArr.push(rndCardId1);
               break;
             }
           }
+          //choosing second random cardId and validates its not duplicate
           while (true) {
-            rnd2 = Math.floor(Math.random(1) * sizeOfBoard) + 1;
-            if (rndArr.find((i) => i == rnd2) == undefined) {
-              rndArr.push(rnd2);
+            rndCardId2 = Math.floor(Math.random(1) * numOfCards) + 1;
+            if (cardIdArr.find((i) => i == rndCardId2) == undefined) {
+              cardIdArr.push(rndCardId2);
               break;
             }
           }
-          funResultArr.push({ id1: rnd1, id2: rnd2, picId: rndPicId });
+          //pushing the cards d and picture id as an object to the returned array
+          funResultArr.push({
+            id1: rndCardId1,
+            id2: rndCardId2,
+            picId: rndPicId,
+          });
         }
+        //printing the array so i can cheat.
         console.log(funResultArr);
         return funResultArr;
       }
 
-      function givePicToId() {
-        for (let i of objArr) {
-          //i = { id1: rnd1, id2: rnd2, picId: rndPicId }
+      function givePicToCard() {
+        // a function that adds the right image to the right couple.
+        //it takes the img fom pictures folder
+        //i named every picture with a number 1-36 so i can call using a loop
+        for (let i of CardsGroupArr) {
+          //i = {id1: rndCardId1,id2: rndCardId2,picId: rndPicId,}
           document.querySelector(
             `#card${i.id1}`
           ).innerHTML += `<img id = "p${i.id1}" class= "card" src="/pictures/${i.picId}.jpg">`;
           document.querySelector(
             `#card${i.id2}`
           ).innerHTML += `<img id = "p${i.id2}" class= "card" src="/pictures/${i.picId}.jpg">`;
-          document.querySelector(`#p${i.id1}`).style.display = "none";
-          document.querySelector(`#p${i.id2}`).style.display = "none";
         }
       }
       function updateMoveMis() {
@@ -107,83 +178,86 @@
         document.querySelector("#mistakes").textContent =
           "Mistakes: " + mistakes;
       }
-      function justAPeek() {
-        // a function that shows the cards for 3 seconds and then hides them
-        for (let i = 1; i <= sizeOfBoard; i++) {
-          //reveal the cards
-          document.querySelector(`#p${i}`).style.display = "block";
-          document.querySelector(`#s${i}`).style.display = "none";
-        }
-        setTimeout(hideCards, 3000); //hide the cars after 3 seconds
-      }
+
       function hideCards() {
-        for (let i = 1; i <= sizeOfBoard; i++) {
-          //reveal the blocks
+        for (let i = 1; i <= numOfCards; i++) {
+          //reveal the blocks and hide the cards
           document.querySelector(`#p${i}`).style.display = "none";
           document.querySelector(`#s${i}`).style.display = "block";
         }
+        startTimer();
       }
       function revealPic(pictureId) {
-        opnCardCount++;
-        if (opnCardCount == 1) {
-          //if only one card open:
+        //i checked how many cards are open
+        //if only no cards are opened then open this card and dont do anything else
+        if (opnCardCount == 0) {
+          opnCardCount++;
           opnCardId1 = pictureId;
-
           document.querySelector(`#s${pictureId}`).style.display = "none";
           document.querySelector(`#p${pictureId}`).style.display = "block";
-        } else if (opnCardCount == 2) {
+          //if there is an opened card already, open the second one,
+          //and check if both of theirs pictures ids are the same.
+        } else if (opnCardCount == 1) {
           opnCardId2 = pictureId;
-          if (opnCardId1 == opnCardId2) {
-            //won't happen
-          }
           document.querySelector(`#s${opnCardId2}`).style.display = "none";
           document.querySelector(`#p${opnCardId2}`).style.display = "block";
-          ///check both cards are the same pic
           moves++;
-          if (!checkSamePic()) {
-            disableAllButtons();
-            setTimeout(flipSquares, 1000); //flip the squares but wait 1 seconds
-            mistakes++;
-          } else {
+          //if it is, count it as a score and check if the score = the number of cards (a win)
+          //if its a win - stop the timer and tell the user he won
+          if (checkSamePic()) {
             score++;
-            if (score == sizeOfBoard / 2) {
+            if (score == numOfCards / 2) {
+              stopTimer();
               document.querySelector("#win").style.display = "block";
             }
+            // if it isnt the same picture, dont let him click on any other card
+          } else {
+            disableAllButtons();
+            setTimeout(flipCards, 1000); //flip the cards but wait 1 seconds
+            mistakes++;
           }
-
           updateMoveMis();
           opnCardCount = 0;
         }
       }
-      function createBoard(num) {
-        opnCardCount = 0;
-        opnCardId1;
-        opnCardId2;
-        mistakes = 0;
-        moves = 0;
-        score = 0;
-        document.querySelector("#board").style.gridTemplateColumns =
-          "repeat(" + num + ", 90px)";
-        document.querySelector("#lblSize").style.display = "none";
-        document.querySelector("#bSize6").style.display = "none";
-        document.querySelector("#bSize2").style.display = "none";
-        document.querySelector("#bSize4").style.display = "none";
-        document.querySelector("#NGbtn").style.display = "block";
-        num *= num;
-        sizeOfBoard = num;
-        objArr = createObjArr(); // an arrey of 2 square ids and 1 picture id
-        for (let i = 1; i <= sizeOfBoard; i++) {
-          document.querySelector(
-            "#board"
-          ).innerHTML += `<div class="card" id="card${i}">
-            <button class="square" id="s${i}" onclick="revealPic(${i})"></button>
-          </div>`;
+      function checkSamePic() {
+        //going over the card group array and check if both opened ids are in the same card group
+        for (let i of CardsGroupArr) {
+          if (
+            (i.id1 == opnCardId1 && i.id2 == opnCardId2) ||
+            (i.id1 == opnCardId2 && i.id2 == opnCardId1)
+          ) {
+            return true;
+          }
         }
-        givePicToId();
-        justAPeek();
+        return false;
       }
-
+      function disableAllButtons() {
+        // going over every button and rewriting the onclick function to null
+        let sqLst = document.querySelectorAll(".square");
+        for (let i of sqLst) {
+          i.onclick = "";
+        }
+      }
+      function flipCards() {
+        //hide the open pictures, and than enales the buttons again
+        document.querySelector(`#s${opnCardId1}`).style.display = "block";
+        document.querySelector(`#p${opnCardId1}`).style.display = "none";
+        document.querySelector(`#s${opnCardId2}`).style.display = "block";
+        document.querySelector(`#p${opnCardId2}`).style.display = "none";
+        enableAllButtons();
+      }
+      function enableAllButtons() {
+        //// going over every button and rewriting the onclick function to the revealpic function
+        let sqLst = document.querySelectorAll(".square");
+        for (let i = 1; i <= sqLst.length; i++) {
+          sqLst[i - 1].onclick = function () {
+            revealPic(i);
+          };
+        }
+      }
       function reset() {
+        // a function to reset the page:
         document.querySelector("#board").innerHTML = "";
         document.querySelector("#win").style.display = "none";
         document.querySelector("#board").style.display = "grid";
@@ -193,41 +267,10 @@
         document.querySelector("#bSize2").style.display = "block";
         document.querySelector("#bSize4").style.display = "block";
         document.querySelector("#NGbtn").style.display = "none";
+        document.querySelector("#timer").textContent = "Timer: 00:00";
+        moves = 0;
+        mistakes = 0;
         updateMoveMis();
-      }
-      function disableAllButtons() {
-        let sqLst = document.querySelectorAll(".square");
-        for (let i of sqLst) {
-          i.onclick = "";
-        }
-      }
-      function enableAllButtons() {
-        let sqLst = document.querySelectorAll(".square");
-        for (let i = 1; i <= sqLst.length; i++) {
-          sqLst[i - 1].onclick = function () {
-            revealPic(i);
-          };
-        }
-      }
-
-      function flipSquares() {
-        document.querySelector(`#s${opnCardId1}`).style.display = "block";
-        document.querySelector(`#p${opnCardId1}`).style.display = "none";
-        document.querySelector(`#s${opnCardId2}`).style.display = "block";
-        document.querySelector(`#p${opnCardId2}`).style.display = "none";
-        enableAllButtons();
-        // enableAllButtons();
-      }
-      function checkSamePic() {
-        for (let i of objArr) {
-          if (
-            (i.id1 == opnCardId1 && i.id2 == opnCardId2) ||
-            (i.id1 == opnCardId2 && i.id2 == opnCardId1)
-          ) {
-            return true;
-          }
-        }
-        return false;
       }
     </script>
   </body>
