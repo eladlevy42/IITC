@@ -9,26 +9,47 @@
   <body>
     <div class="main">
       <div class="boardWrapper">
+        <h1>CARS MEMORY GAME</h1>
         <div class="top">
           <label id="mistakes">MISTAKES: 0</label
           ><label id="win" style="display: none">You Win!</label>
           <label id="moves">MOVES: 0</label>
         </div>
         <div id="board"></div>
-        <button class="reset" onclick="reset()">NEW GAME</button>
+        <button
+          class="reset"
+          id="NGbtn"
+          style="display: none"
+          onclick="reset()"
+        >
+          NEW GAME
+        </button>
+        <label id="lblSize">WHAT SIZE OF BOARD DO YOU WANNA PLAY?</label>
+        <div id="boardSizeWrapper">
+          <button class="boardSizeBtn" id="bSize2" onclick="createBoard(2)">
+            2X2
+          </button>
+          <button class="boardSizeBtn" id="bSize4" onclick="createBoard(4)">
+            4X4
+          </button>
+
+          <button class="boardSizeBtn" id="bSize6" onclick="createBoard(6)">
+            6X6
+          </button>
+        </div>
+        <h6>by Elad Levy</h6>
       </div>
     </div>
 
     <script>
-      createBoard();
-      let objArr = createObjArr(); // an arrey of 2 square ids and 1 picture id
-      givePicToId();
+      let objArr;
       let opnCardCount = 0;
       let opnCardId1;
       let opnCardId2;
       let mistakes = 0;
       let moves = 0;
       let score = 0;
+      let sizeOfBoard = 4;
       function createObjArr() {
         let rndArr = [];
         let rndPicArr = [];
@@ -38,24 +59,24 @@
         let rndPicId = 0;
         let funResultArr = [];
         let i = 1;
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < sizeOfBoard / 2; i++) {
           //loop that adds a number of the picture in random order to an array
           while (true) {
-            rndPicId = Math.floor(Math.random(1) * 8) + 1;
+            rndPicId = Math.floor(Math.random(1) * (sizeOfBoard / 2)) + 1;
             if (rndPicArr.find((element) => element == rndPicId) == undefined) {
               rndPicArr.push(rndPicId);
               break;
             }
           }
           while (true) {
-            rnd1 = Math.floor(Math.random(1) * 16) + 1;
+            rnd1 = Math.floor(Math.random(1) * sizeOfBoard) + 1;
             if (rndArr.find((j) => j == rnd1) == undefined) {
               rndArr.push(rnd1);
               break;
             }
           }
           while (true) {
-            rnd2 = Math.floor(Math.random(1) * 16) + 1;
+            rnd2 = Math.floor(Math.random(1) * sizeOfBoard) + 1;
             if (rndArr.find((i) => i == rnd2) == undefined) {
               rndArr.push(rnd2);
               break;
@@ -81,9 +102,26 @@
         }
       }
       function updateMoveMis() {
+        //updates the labels
         document.querySelector("#moves").textContent = "Moves: " + moves;
         document.querySelector("#mistakes").textContent =
           "Mistakes: " + mistakes;
+      }
+      function justAPeek() {
+        // a function that shows the cards for 3 seconds and then hides them
+        for (let i = 1; i <= sizeOfBoard; i++) {
+          //reveal the cards
+          document.querySelector(`#p${i}`).style.display = "block";
+          document.querySelector(`#s${i}`).style.display = "none";
+        }
+        setTimeout(hideCards, 3000); //hide the cars after 3 seconds
+      }
+      function hideCards() {
+        for (let i = 1; i <= sizeOfBoard; i++) {
+          //reveal the blocks
+          document.querySelector(`#p${i}`).style.display = "none";
+          document.querySelector(`#s${i}`).style.display = "block";
+        }
       }
       function revealPic(pictureId) {
         opnCardCount++;
@@ -108,8 +146,7 @@
             mistakes++;
           } else {
             score++;
-            console.log(score);
-            if (score == 8) {
+            if (score == sizeOfBoard / 2) {
               document.querySelector("#win").style.display = "block";
             }
           }
@@ -118,121 +155,44 @@
           opnCardCount = 0;
         }
       }
-      function createBoard() {
-        document.querySelector(
-          "#board"
-        ).innerHTML = `<div class="card" id="card1">
-            <button class="square" id="s1" onclick="revealPic(1)"></button>
-          </div>
-          <div class="card" id="card2">
-            <button class="square" id="s2" onclick="revealPic(2)"></button>
-          </div>
-          <div class="card" id="card3">
-            <button class="square" id="s3" onclick="revealPic(3)"></button>
-          </div>
-          <div class="card" id="card4">
-            <button class="square" id="s4" onclick="revealPic(4)"></button>
-          </div>
-          <div class="card" id="card5">
-            <button class="square" id="s5" onclick="revealPic(5)"></button>
-          </div>
-          <div class="card" id="card6">
-            <button class="square" id="s6" onclick="revealPic(6)"></button>
-          </div>
-          <div class="card" id="card7">
-            <button class="square" id="s7" onclick="revealPic(7)"></button>
-          </div>
-          <div class="card" id="card8">
-            <button class="square" id="s8" onclick="revealPic(8)"></button>
-          </div>
-          <div class="card" id="card9">
-            <button class="square" id="s9" onclick="revealPic(9)"></button>
-          </div>
-          <div class="card" id="card10">
-            <button class="square" id="s10" onclick="revealPic(10)"></button>
-          </div>
-          <div class="card" id="card11">
-            <button class="square" id="s11" onclick="revealPic(11)"></button>
-          </div>
-          <div class="card" id="card12">
-            <button class="square" id="s12" onclick="revealPic(12)"></button>
-          </div>
-          <div class="card" id="card13">
-            <button class="square" id="s13" onclick="revealPic(13)"></button>
-          </div>
-          <div class="card" id="card14">
-            <button class="square" id="s14" onclick="revealPic(14)"></button>
-          </div>
-          <div class="card" id="card15">
-            <button class="square" id="s15" onclick="revealPic(15)"></button>
-          </div>
-          <div class="card" id="card16">
-            <button class="square" id="s16" onclick="revealPic(16)"></button>
-          </div>`;
-      }
-      function reset() {
-        for (let i = 1; i <= 16; i++) {
-          document.querySelector(`#s${i}`).style.display = "block";
-          document.querySelector(`#p${i}`).style.display = "none";
-        }
-        document.querySelector("#win").style.display = "none";
-        document.querySelector(
-          "#board"
-        ).innerHTML = `<div class="card" id="card1">
-            <button class="square" id="s1" onclick="revealPic(1)"></button>
-          </div>
-          <div class="card" id="card2">
-            <button class="square" id="s2" onclick="revealPic(2)"></button>
-          </div>
-          <div class="card" id="card3">
-            <button class="square" id="s3" onclick="revealPic(3)"></button>
-          </div>
-          <div class="card" id="card4">
-            <button class="square" id="s4" onclick="revealPic(4)"></button>
-          </div>
-          <div class="card" id="card5">
-            <button class="square" id="s5" onclick="revealPic(5)"></button>
-          </div>
-          <div class="card" id="card6">
-            <button class="square" id="s6" onclick="revealPic(6)"></button>
-          </div>
-          <div class="card" id="card7">
-            <button class="square" id="s7" onclick="revealPic(7)"></button>
-          </div>
-          <div class="card" id="card8">
-            <button class="square" id="s8" onclick="revealPic(8)"></button>
-          </div>
-          <div class="card" id="card9">
-            <button class="square" id="s9" onclick="revealPic(9)"></button>
-          </div>
-          <div class="card" id="card10">
-            <button class="square" id="s10" onclick="revealPic(10)"></button>
-          </div>
-          <div class="card" id="card11">
-            <button class="square" id="s11" onclick="revealPic(11)"></button>
-          </div>
-          <div class="card" id="card12">
-            <button class="square" id="s12" onclick="revealPic(12)"></button>
-          </div>
-          <div class="card" id="card13">
-            <button class="square" id="s13" onclick="revealPic(13)"></button>
-          </div>
-          <div class="card" id="card14">
-            <button class="square" id="s14" onclick="revealPic(14)"></button>
-          </div>
-          <div class="card" id="card15">
-            <button class="square" id="s15" onclick="revealPic(15)"></button>
-          </div>
-          <div class="card" id="card16">
-            <button class="square" id="s16" onclick="revealPic(16)"></button>
-          </div>`;
-        objArr = createObjArr(); // an arrey of 2 square ids and 1 picture id
-        givePicToId();
+      function createBoard(num) {
         opnCardCount = 0;
         opnCardId1;
         opnCardId2;
         mistakes = 0;
         moves = 0;
+        score = 0;
+        document.querySelector("#board").style.gridTemplateColumns =
+          "repeat(" + num + ", 90px)";
+        document.querySelector("#lblSize").style.display = "none";
+        document.querySelector("#bSize6").style.display = "none";
+        document.querySelector("#bSize2").style.display = "none";
+        document.querySelector("#bSize4").style.display = "none";
+        document.querySelector("#NGbtn").style.display = "block";
+        num *= num;
+        sizeOfBoard = num;
+        objArr = createObjArr(); // an arrey of 2 square ids and 1 picture id
+        for (let i = 1; i <= sizeOfBoard; i++) {
+          document.querySelector(
+            "#board"
+          ).innerHTML += `<div class="card" id="card${i}">
+            <button class="square" id="s${i}" onclick="revealPic(${i})"></button>
+          </div>`;
+        }
+        givePicToId();
+        justAPeek();
+      }
+
+      function reset() {
+        document.querySelector("#board").innerHTML = "";
+        document.querySelector("#win").style.display = "none";
+        document.querySelector("#board").style.display = "grid";
+        document.querySelector("#board").style.gridTemplateColumns = "";
+        document.querySelector("#lblSize").style.display = "block";
+        document.querySelector("#bSize6").style.display = "block";
+        document.querySelector("#bSize2").style.display = "block";
+        document.querySelector("#bSize4").style.display = "block";
+        document.querySelector("#NGbtn").style.display = "none";
         updateMoveMis();
       }
       function disableAllButtons() {

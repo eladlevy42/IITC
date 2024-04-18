@@ -16,14 +16,21 @@ body {
 }
 
 .boardWrapper {
-  width: 80%;
+  width: 40%;
+  border: #3d2f94 2px solid;
+  padding: 15px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .top {
-  width: 100%;
+  width: 70%;
+  margin: 15px;
+  border: #3d2f94 2px solid;
+  padding: 15px;
+  border-radius: 15px;
   display: flex;
   justify-content: space-between;
 }
@@ -34,10 +41,16 @@ body {
   grid-template-columns: repeat(4, 90px); /* Use repeat() for cleaner code */
   grid-gap: 10px;
 }
-
+#boardSizeWrapper {
+  display: flex;
+  width: 15%;
+  justify-content: CENTER;
+  margin-top: 5px;
+}
 .card {
   width: 90px;
-  height: 160px;
+  height: 90px;
+  padding: 0;
   background-color: #ccc;
   border-radius: 5px;
   display: flex;
@@ -45,7 +58,7 @@ body {
   align-items: center;
   overflow: hidden; /* Ensure the image doesn't exceed the card size */
 }
-.reset {
+button {
   margin: 5px;
   padding: 10px 20px;
   background-color: #4caf50;
@@ -57,7 +70,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.reset:hover {
+button:hover {
   background-color: #45a049;
 }
 
@@ -67,6 +80,7 @@ label {
 }
 
 .square {
+  margin: 0;
   width: 100%;
   height: 100%;
   background-color: #3d2f94;
