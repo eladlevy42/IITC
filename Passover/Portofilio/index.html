@@ -4,14 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Days+One&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Days+One&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
+    
   </head>
   <body>
     <div id="navBar">
       <div class="linkContainer">
-        <a href="" class="navBarLnk">ABOUT ME </a>
-        <a href="" class="navBarLnk">PROJECTS </a>
-        <a href="" class="navBarLnk">CONTACT ME </a>
+        <a href="#aboutMe" class="navBarLnk">ABOUT ME </a>
+        <a href="#projects" class="navBarLnk">PROJECTS </a>
+        <a href="#contact" class="navBarLnk">CONTACT ME </a>
       </div>
     </div>
     <div id="main">
@@ -20,9 +27,10 @@
         <h1>Hi! I'm Rob! I teach people how to code and make websites.</h1>
       </div>
       <div id="aboutMe">
-        <h1>about Me</h1>
+        <h1>About Me</h1>
         <div id="abtContent">
-          <img />
+          <img src="/images/rob-aboutme.jpeg" id = 'robAbt'/>
+          <div id = 'abtTxt'>
           <p>
             Almost a decade ago I was busy teaching math to teenagers at three
             schools in London and Cambridge. Since I’m a bit of a coding geek, I
@@ -30,31 +38,41 @@
             learned that web development was a very lucrative career choice, so
             I gave up my successful (and sometimes stressful) job as a teacher
             to build websites. Today, I couldn’t be happier with that
-            decision.<br />
-
+            decision.
+            </p><p>
             After building websites for about seven years, I noticed a lot of
             people struggling to learn how to code. I wanted others to have the
             same freedoms that I enjoyed, so I started teaching web
-            development<br />
-
+            development
+          </p><p>
             I'm familiar with HTML5, CSS3, JavaScript, PHP7 and MySQL. Checkout
             some of the projects I've done below.
           </p>
         </div>
-
-        <div id="projects">
-          <div class="projectItem">
-            <img /><label class="projLbl">Earth Facts</label>
+        </div>
+      </div> <h1 id = "projects">Projects</h1>
+        <div class="projects">
+          <div class="projectItem" id = "earth-project">
+            <img /><label class="text"><h3 class="project-name">Earth Facts</h3><div class="content">
+              <p>A HTML project about some facts about the earth.</p> <a class="button" href="../1-html/htmlproject.html" target="_bank">View Project</a></div>
           </div>
-          <div class="projectItem">
-            <img /><label class="projLbl">BBC News Clone</label>
+    <div class="bbc-project">
+          <div class="text">
+              <h3 class="project-name">BBC News Clone</h3>
+              <div class="content">
+                  <p>This project is a clone of the BBC news website from the Web Dev 2.0 Course.</p>
+              </div>
+            <img /><label class="text">BBC News Clone</label>
           </div>
         </div>
+          </div>
+      </div>
+
 
         <div id="contact">
           <h1>Contact</h1>
           <p>Use this form to get in touch. I would love to hear from you!</p>
-          <form id="ContactForm">
+          <form id="contactForm">
             <div id="leftForm">
               <label for="name">Name</label
               ><input type="text" id="name" placeholder="Yourname" />
@@ -68,18 +86,32 @@
               ><input type="email" id="email" placeholder="Your email adress" />
             </div>
             <div id="rightForm">
-              <label for="msg">message</label><input type="text" />
-            </div>
-            <input type="SUBMIT" />
+              <label for="msg">message</label><textarea type="textarea" rows="15" id ='msg' ></textarea>
+            <button type="submit" fdprocessedid="v6vplv">Submit</button></div>
+            
           </form>
         </div>
         
           </div>
         </div>
+
+    </div>
+    <footer>
+      <div class="container">
+          <div class="copyright">
+              This site © 2022 Rob Percival
+          </div>
+          <div class="social-media">
+
+              <a href="https://www.facebook.com/rpcodestars"><i class="fa fa-facebook-official"></i></a>
+
+              <a href="https://twitter.com/techedrob"><i class="fa fa-twitter"></i></a>
+
+          </div>
+
       </div>
-    </div><div id="footer">
-        <div>This site © 2022 Rob Percival</div>
-        <div>
+
+  </footer><span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span>
           <!-- icons with links -->
   </body>
 </html>

@@ -1,20 +1,34 @@
 @import url(reset.css);
 
+.work-sans {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+}
 body {
   background-image: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
   font-family: "Work Sans", sans-serif;
 }
 #navBar {
   width: 100%;
+  height: 50px;
   background-color: #200e3d;
   display: flex;
+  align-content: center;
   justify-content: center;
   padding-block: 10px;
 }
-h1,
-h2,
-h3 {
+.days-one-regular {
   font-family: "Days One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Days One", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
 }
 #main {
   display: flex;
@@ -28,17 +42,25 @@ h3 {
 }
 .rob,
 h1 {
-  font-size: 24px;
-  margin: 30px 0px 100px;
+  margin-right: auto;
+  margin-left: auto;
+  color: black;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 60px;
 }
 #robMainPic {
   border-style: none;
   border-radius: 50%;
-  margin: 0 auto;
+  margin: auto;
+  margin-top: 70px;
+  margin-bottom: 30px;
   max-width: 440px;
   display: block;
 }
 .linkContainer {
+  margin-top: auto;
+  margin-bottom: auto;
   width: 40;
   display: flex;
   justify-content: space-between;
@@ -50,6 +72,197 @@ a {
   padding: 0 15px;
   color: white;
   transition: 0.2s;
-  font-weight: 520;
   text-transform: uppercase;
+}
+#abtContent {
+  display: flex;
+  justify-content: space-around;
+}
+
+#abtTxt {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: wrap;
+}
+#abtTxt p {
+  margin-top: 0;
+}
+#aboutMe {
+  width: 90%;
+  max-width: 1100px;
+  height: 650px;
+  background-color: white;
+  padding: 40px 50px 70px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  box-shadow: 10px 10px 0px rgb(0 0 0 / 40%),
+    -10px -10px 0px rgb(255 114 114 / 80%);
+}
+#robAbt {
+  height: 450px;
+  background-size: cover;
+  background-position: center;
+  width: 400px;
+  margin-right: 50px;
+}
+.text {
+  position: absolute;
+  height: 65px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  background-color: white;
+  overflow: hidden;
+  transition: 0.2s;
+  padding: 20px;
+}
+
+.text:hover {
+  height: 175px;
+  transition: 0.3s;
+}
+
+.text h3 {
+  margin-top: 3px;
+}
+#projects {
+  color: white;
+}
+.projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: wrap;
+}
+.bbc-project {
+  width: 400px;
+  height: 400px;
+  background: white;
+  position: relative;
+  border-radius: 10px;
+  background-image: url("images/bbcnews.png");
+  margin: 20px;
+  background-size: cover;
+  background-position: center;
+}
+#earth-project {
+  width: 400px;
+  height: 400px;
+  background: white;
+  position: relative;
+  border-radius: 10px;
+  background-image: url("images/earth.jpeg");
+  margin: 20px;
+  background-size: cover;
+  background-position: center;
+}
+#projects h1 {
+  color: white;
+}
+
+#contact {
+  width: 100%;
+  height: auto;
+  padding: 75px 0 50px 0;
+  text-align: center;
+  background-color: rgba(3, 3, 3, 45%);
+}
+#contact p {
+  margin-bottom: 50px;
+}
+#contact h1,
+#contact p {
+  color: white;
+}
+#contactForm {
+  max-width: 800px;
+  display: flex;
+  text-align: left;
+  max-width: 1100px;
+  margin: 0 auto;
+  color: white;
+}
+#contactForm label {
+  display: block;
+  margin-bottom: 9px;
+}
+#rightForm textarea {
+  border-radius: 5px;
+  border: 0px;
+}
+#rightForm button {
+  color: #1d3d5f;
+  border: 0;
+  border-radius: 5px;
+  background: lightblue;
+  width: 140px;
+  height: 40px;
+  margin-top: 40px;
+  margin-left: auto;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#rightForm button:hover {
+  background: black;
+  color: white;
+  transition: 0.2s;
+}
+#rightForm {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+#leftForm {
+  flex: 1;
+  margin-right: 50px;
+}
+#leftForm input {
+  width: 100%;
+  border-radius: 5px;
+  border: 0px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+}
+
+footer {
+  height: 90px;
+  background-color: #1f2027;
+}
+
+footer .container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.social-media {
+  font-size: 200%;
+  width: auto;
+  margin-left: auto;
+}
+
+.social-media {
+  font-size: 200%;
+  width: auto;
+  margin-left: auto;
+}
+
+.social-media a i {
+  color: white;
+  transition: 0.2s;
+}
+
+.social-media a i:hover {
+  color: lightblue;
+  transition: 0.2;
+}
+
+.copyright {
+  color: white;
 }
