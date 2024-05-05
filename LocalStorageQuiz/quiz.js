@@ -75,20 +75,18 @@ function createQuestions() {
       D: answers[3],
     };
   });
-  console.log(questionsArr);
 }
 function printQuestions() {
   createQuestions();
   let quizElement = document.querySelector("#quiz");
-  quizElement.innerHTML = "<ol>";
+  quizElement.innerHTML = "<ol start = '1'>";
   for (let i = 0; i < questionsArr.length; i++) {
     quizElement.innerHTML += `
-      <li>${questionsArr[i].Q}
-        <ul class="a" id = 'q${i}A' onclick="checkAns('${i}','A')"> ${questionsArr[i].A}</ul>
-        <ul class="a" id = 'q${i}B' onclick="checkAns('${i}','B')"> ${questionsArr[i].B}</ul>
-        <ul class="a" id = 'q${i}C' onclick="checkAns('${i}','C')"> ${questionsArr[i].C}</ul>
-        <ul class="a" id = 'q${i}D' onclick="checkAns('${i}','D')"> ${questionsArr[i].D}</ul>
-      </li>`;
+    <li>${questionsArr[i].Q}<ul>
+        <li  id = 'q${i}A' onclick="checkAns('${i}','A')"> ${questionsArr[i].A}</li>
+        <li  id = 'q${i}B' onclick="checkAns('${i}','B')"> ${questionsArr[i].B}</li>
+        <li  id = 'q${i}C' onclick="checkAns('${i}','C')"> ${questionsArr[i].C}</li>
+        <li  id = 'q${i}D' onclick="checkAns('${i}','D')"> ${questionsArr[i].D}</li></ul></li>`;
   }
   quizElement.innerHTML += "</ol>";
 }
@@ -99,7 +97,6 @@ function updateCount() {
       count += 10;
     }
   }
-  console.log(count);
 }
 function colorAns() {
   for (let i in userAnswers) {
@@ -110,10 +107,12 @@ function colorAns() {
     document.querySelector(`#q${i}C`).style = "color:black";
     document.querySelector(`#q${i}D`).style = "color:black";
     //COLOR THE SELECTED ANSWER
-    if (userAnswers[i] == correctAns[i]) {
-      answerRow.style = "color:green";
-    } else {
-      answerRow.style = "color:red";
+    if (userAnswers[i] != null) {
+      if (userAnswers[i] == correctAns[i]) {
+        answerRow.style = "color:green";
+      } else {
+        answerRow.style = "color:red";
+      }
     }
   }
 }
