@@ -1,6 +1,77 @@
 let correctAns = ["A", "B", "C", "A", "B", "C", "D", "A", "B", "D"];
 let count = 0;
-let questionsArr = [];
+let questionsArr = [
+  {
+    Q: "What car company produces the Mustang?",
+    A: "A) Ford",
+    B: "B) Chevrolet",
+    C: "C) Dodge",
+    D: "D) Toyota",
+  },
+  {
+    Q: "What car company produces the Camaro?",
+    A: "A) Ford",
+    B: "B) Chevrolet",
+    C: "C) Dodge",
+    D: "D) Toyota",
+  },
+  {
+    Q: "What car company produces the Challenger?",
+    A: "A) Ford",
+    B: "B) Chevrolet",
+    C: "C) Dodge",
+    D: "D) Toyota",
+  },
+  {
+    Q: "What car company produces the Civic?",
+    A: "A) Honda",
+    B: "B) Toyota",
+    C: "C) Nissan",
+    D: "D) Hyundai",
+  },
+  {
+    Q: "What car company produces the Corolla?",
+    A: "A) Honda",
+    B: "B) Toyota",
+    C: "C) Nissan",
+    D: "D) Hyundai",
+  },
+  {
+    Q: "What car company produces the Altima?",
+    A: "A) Honda",
+    B: "B) Toyota",
+    C: "C) Nissan",
+    D: "D) Hyundai",
+  },
+  {
+    Q: "What car company produces the Sonata?",
+    A: "A) Honda",
+    B: "B) Toyota",
+    C: "C) Nissan",
+    D: "D) Hyundai",
+  },
+  {
+    Q: "What car company produces the Mustang Mach-E?",
+    A: "A) Ford",
+    B: "B) Chevrolet",
+    C: "C) Dodge",
+    D: "D) Tesla",
+  },
+  {
+    Q: "What car company produces the Bolt EV?",
+    A: "A) Ford",
+    B: "B) Chevrolet",
+    C: "C) Dodge",
+    D: "D) Tesla",
+  },
+  {
+    Q: "What car company produces the Model S?",
+    A: "A) Ford",
+    B: "B) Chevrolet",
+    C: "C) Dodge",
+    D: "D) Tesla",
+  },
+];
 let userAnswers = [];
 let userAnswersJson = JSON.stringify(userAnswers);
 initUserAnswer();
@@ -22,62 +93,8 @@ function reset() {
   printQuestions();
   document.querySelector("#score").style = "display: none";
 }
-function createQuestions() {
-  let questions = [
-    {
-      Q: "What car company produces the Mustang?",
-      A: "A) Ford <br/> B) Chevrolet <br/> C) Dodge <br/> D) Toyota",
-    },
-    {
-      Q: "What car company produces the Camaro?",
-      A: "A) Ford <br/> B) Chevrolet <br/> C) Dodge <br/> D) Toyota",
-    },
-    {
-      Q: "What car company produces the Challenger?",
-      A: "A) Ford <br/> B) Chevrolet <br/> C) Dodge <br/>D) Toyota",
-    },
-    {
-      Q: "What car company produces the Civic?",
-      A: "A) Honda <br/>  B) Toyota <br/>  C) Nissan <br/>  D) Hyundai",
-    },
-    {
-      Q: "What car company produces the Corolla?",
-      A: "A) Honda <br/>  B) Toyota <br/>  C) Nissan <br/>  D) Hyundai",
-    },
-    {
-      Q: "What car company produces the Altima?",
-      A: "A) Honda <br/>  B) Toyota <br/>  C) Nissan <br/>  D) Hyundai",
-    },
-    {
-      Q: "What car company produces the Sonata?",
-      A: "A) Honda <br/>  B) Toyota <br/>  C) Nissan <br/>  D) Hyundai",
-    },
-    {
-      Q: "What car company produces the Mustang Mach-E?",
-      A: "A) Ford <br/> B) Chevrolet <br/> C) Dodge <br/> D) Tesla",
-    },
-    {
-      Q: "What car company produces the Bolt EV?",
-      A: "A) Ford <br/> B) Chevrolet <br/> C) Dodge <br/> D) Tesla",
-    },
-    {
-      Q: "What car company produces the Model S?",
-      A: "A) Ford <br/> B) Chevrolet <br/> C) Dodge <br/> D) Tesla",
-    },
-  ];
-  questionsArr = questions.map((question) => {
-    let answers = question.A.split("<br/>").map((answer) => answer.trim());
-    return {
-      Q: question.Q,
-      A: answers[0],
-      B: answers[1],
-      C: answers[2],
-      D: answers[3],
-    };
-  });
-}
+
 function printQuestions() {
-  createQuestions();
   let quizElement = document.querySelector("#quiz");
   quizElement.innerHTML = "<ol start = '1'>";
   for (let i = 0; i < questionsArr.length; i++) {
