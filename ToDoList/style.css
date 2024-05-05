@@ -1,0 +1,10 @@
+html {
+  width: 100vh;
+}
+body {
+  width: 100%;
+  background-color: burlywood;
+}
+.main {
+  width: 100%;
+}

@@ -16,7 +16,7 @@ body {
 }
 
 .boardWrapper {
-  width: 40%;
+  width: auto;
   border: #3d2f94 2px solid;
   padding: 15px;
   border-radius: 15px;
@@ -26,15 +26,17 @@ body {
 }
 
 .top {
-  width: 70%;
+  overflow: hidden;
+  width: auto;
   margin: 15px;
   border: #3d2f94 2px solid;
   padding: 15px;
   border-radius: 15px;
   display: flex;
-  justify-content: space-between;
 }
-
+#lblSize {
+  text-align: center;
+}
 #board {
   margin-top: 20px; /* Add some spacing */
   display: grid;

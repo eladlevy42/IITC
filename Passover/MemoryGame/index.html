@@ -183,6 +183,7 @@
       function hideCards() {
         for (let i = 1; i <= numOfCards; i++) {
           //reveal the blocks and hide the cards
+          console.log(i);
           document.querySelector(`#p${i}`).style.display = "none";
           document.querySelector(`#s${i}`).style.display = "block";
         }
