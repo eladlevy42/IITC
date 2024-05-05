@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="increaseCount()">Incresment</button>
+    <button onclick="increaseCount2()">Incresment2</button>
+    <p id="countReview">count:</p>
+    <p id="count2Review">count2:</p>
+    <script>
+      let countJson = localStorage.getItem("count");
+      let count = JSON.parse(countJson);
+      let count2Json = localStorage.getItem("count2");
+      let count2 = JSON.parse(count2Json);
+      document.querySelector("#countReview").innerText = `count: ${count}`;
+      document.querySelector("#count2Review").innerText = `count2: ${count2}`;
+      function increaseCount() {
+        //js_local_storage_1
+        count++;
+        countJson = JSON.stringify(count);
+        localStorage.setItem("count", countJson);
+        document.querySelector("#countReview").innerText = `count: ${count}`;
+      }
+      function increaseCount2() {
+        //js_local_storage_1.5
+        count2++;
+        count2Json = JSON.stringify(count2);
+        localStorage.setItem("count2", count2Json);
+        document.querySelector("#count2Review").innerText = `count2: ${count2}`;
+      }
+    </script>
+  </body>
+</html>
