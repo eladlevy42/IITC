@@ -8,12 +8,15 @@
   </head>
   <body>
     <div class="main">
+      <h1>TO DO LIST</h1>
       <div class="menu">
-        <input type="text" id="toDoItem" />
-        <button id="add" onclick="addBtn()">Add To List</button>
-        <button id="resetLst" onclick="reset()">Reset List</button>
+        <input type="text" id="toDoItem" placeholder="Add Mission" />
+        <div class="btns">
+          <button id="add" onclick="addBtn()">Add To List</button>
+          <button id="resetLst" onclick="reset()">Reset List</button>
+        </div>
       </div>
-      <ul id="list"></div>
+      <ul id="list"></ul>
     </div>
     <script src="toDo.js"></script>
   </body>
