@@ -1,4 +1,3 @@
-let correctAns = ["A", "B", "C", "A", "B", "C", "D", "A", "B", "D"];
 let count = 0;
 let questionsArr = [
   {
@@ -71,51 +70,57 @@ let questionsArr = [
     C: "C) Dodge",
     D: "D) Tesla",
   },
-];
-let userAnswers = [];
-let userAnswersJson = JSON.stringify(userAnswers);
+]; //array of questions with the answers (no sign to correct answer)
+let correctAns = ["A", "B", "C", "A", "B", "C", "D", "A", "B", "D"]; //an array of the correct answers, index0 = q1 and so on.
+let userAnswers, userAnswersJson;
 initUserAnswer();
 function initUserAnswer() {
   if (localStorage.getItem("userAns") == null) {
+    //if there is no local storage for userAns, create one.
     let userAnswers = [];
     let userAnswersJson = JSON.stringify(userAnswers);
     localStorage.setItem("userAns", userAnswersJson);
   } else {
+    //if there is a local storage for userAns, update the arrays.
     userAnswersJson = localStorage.getItem("userAns");
     userAnswers = JSON.parse(userAnswersJson);
   }
   printQuestions();
 }
 function reset() {
+  //reset function - won't clear all local storage, only resetting userAns.
   userAnswers = [];
   userAnswersJson = JSON.stringify(userAnswers);
   localStorage.setItem("userAns", userAnswersJson);
-  printQuestions();
+  printQuestions(); //print th questions again to color it by default;
   document.querySelector("#score").style = "display: none";
 }
 
 function printQuestions() {
   let quizElement = document.querySelector("#quiz");
-  quizElement.innerHTML = "<ol start = '1'>";
+  quizElement.innerHTML = "<ol id = 'quizOl' start = '1'>";
   for (let i = 0; i < questionsArr.length; i++) {
-    quizElement.innerHTML += `
+    document.querySelector("#quizOl").innerHTML += `
     <li>${questionsArr[i].Q}<ul>
-        <li  id = 'q${i}A' onclick="checkAns('${i}','A')"> ${questionsArr[i].A}</li>
-        <li  id = 'q${i}B' onclick="checkAns('${i}','B')"> ${questionsArr[i].B}</li>
-        <li  id = 'q${i}C' onclick="checkAns('${i}','C')"> ${questionsArr[i].C}</li>
-        <li  id = 'q${i}D' onclick="checkAns('${i}','D')"> ${questionsArr[i].D}</li></ul></li>`;
+        <li  id = 'q${i}A' onclick="addAns('${i}','A')"> ${questionsArr[i].A}</li>
+        <li  id = 'q${i}B' onclick="addAns('${i}','B')"> ${questionsArr[i].B}</li>
+        <li  id = 'q${i}C' onclick="addAns('${i}','C')"> ${questionsArr[i].C}</li>
+        <li  id = 'q${i}D' onclick="addAns('${i}','D')"> ${questionsArr[i].D}</li></ul></li>`;
   }
   quizElement.innerHTML += "</ol>";
 }
 function updateCount() {
+  //updates localStorage count for the user's correct answers.
   count = 0;
   for (let i in userAnswers) {
+    //checks only in the questions user has answered
     if (userAnswers[i] == correctAns[i]) {
       count += 10;
     }
   }
 }
 function colorAns() {
+  //the function will run over all the answered questions, reset the color to black as default and then color the choosen answer with the right color. its in a loop so it will go on every question user answered and saved in the localStorage (userAns).
   for (let i in userAnswers) {
     let answerRow = document.querySelector(`#q${i}${userAnswers[i]}`);
     //RESETING THE COLOR
@@ -133,12 +138,14 @@ function colorAns() {
     }
   }
 }
-function checkAns(qNum, ans) {
+function addAns(qNum, ans) {
+  //adds the answer to the localStorage.
   userAnswers[qNum] = ans;
   userAnswersJson = JSON.stringify(userAnswers);
   localStorage.setItem("userAns", userAnswersJson);
 }
 function revealScore() {
+  //the function will update the count, print it in the lables, and color the answers.
   updateCount();
   colorAns();
   document.querySelector("#score").innerText = `your score is: ${count}/100`;

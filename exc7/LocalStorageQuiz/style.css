@@ -1,3 +1,7 @@
+ol {
+  list-style-type: decimal;
+}
+
 .main {
   display: flex;
   flex-direction: column;
