@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class 06/05/2024</title>
+  </head>
+  <body>
+    <script>
+      function checkBigThan10(arr) {
+        return arr.find((x) => x > 10) != undefined;
+      }
+
+      function isEven(arr) {
+        return arr.find((x) => x % 2 == 0) != undefined;
+      }
+      function arrToEven(arr) {
+        return arr.filter((x) => x % 2 != 0);
+      }
+      console.log(arrToEven([1, 2, 3]));
+    </script>
+  </body>
+</html>
