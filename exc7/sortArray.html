@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function sortArray(arr) {
+        let minIndex;
+        for (let i in arr) {
+          minIndex = i;
+          for (let j = i; j < arr.length; j++) {
+            //this is the catch! the second loop doesnt start at zero, it starts with i.
+            if (arr[minIndex] > arr[j]) {
+              minIndex = j;
+            }
+          }
+          let temp = arr[minIndex];
+          arr[minIndex] = arr[i];
+          arr[i] = temp;
+        }
+        return arr;
+      }
+      console.log(sortArray([2, 3, 1, 5, 7]));
+    </script>
+  </body>
+</html>
