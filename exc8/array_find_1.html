@@ -78,14 +78,12 @@
       //array_map_1z
       let names = ["Alice", "Bob", "Charlie", "David"];
       function addToDom1(arr) {
-        let newArr = arr.map((x) => `${x}, `);
-        let newDiv = document.createElement("div");
-        let newContent = document.createTextNode(newArr.join(""));
-        newDiv.appendChild(newContent);
-        let currentDiv = document.getElementById("div1");
-        document.body.insertBefore(newDiv, currentDiv);
+        let newArr = arr.map((x) => `<li>${x}</li>`).join("");
+        let newOl = document.createElement("ol");
+        newOl.innerHTML = newArr;
+        document.body.appendChild(newOl);
       }
-      //addToDom1(names);
+      addToDom1(names);
 
       //
     </script>
