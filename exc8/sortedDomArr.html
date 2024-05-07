@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ol class="list"></ol>
+    <script>
+      function printSort(arr) {
+        arr.sort();
+        arr = arr.map((x) => `<li>${x}</li>`);
+        document.querySelector(".list").innerHTML = arr.join("");
+      }
+      printSort(["elad", "nir"]);
+    </script>
+  </body>
+</html>

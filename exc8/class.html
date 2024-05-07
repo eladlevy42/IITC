@@ -15,8 +15,10 @@
         return arr.find((x) => x % 2 == 0) != undefined;
       }
       function arrToEven(arr) {
+        arr.sort();
         return arr.filter((x) => x % 2 != 0);
       }
+
       console.log(arrToEven([1, 2, 3]));
     </script>
   </body>
