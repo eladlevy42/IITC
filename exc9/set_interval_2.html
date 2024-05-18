@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+      function printArr(arr) {
+        let i = 0;
+        let intervalId = setInterval(function () {
+          if (i < arr.length) {
+            let element = document.createElement("p");
+            element.innerText = arr[i];
+            document.querySelector("#container").appendChild(element);
+            i++;
+          } else {
+            clearInterval(intervalId);
+          }
+        }, 1000);
+      }
+      printArr([1, 2, 3, 4, 5]);
+    </script>
+  </body>
+</html>
