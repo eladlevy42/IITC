@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="val" placeholder="enter number" />
+    <button onclick="doIsEven()">click</button>
+    <label id="res"></label>
+    <label id="error"></label>
+
+    <script>
+      //////////////////////////////////////////////
+      function isEvenAsync() {
+        let num = document.querySelector("#val").value;
+        document.querySelector("#res").innerText = "";
+        document.querySelector("#error").innerText = "";
+        const promise1 = new Promise((resolve, reject) => {
+          if (Number(num)) {
+            resolve(num % 2 == 0);
+          } else {
+            reject("validation error");
+          }
+        });
+        return promise1;
+      }
+      function doIsEven() {
+        const result = isEvenAsync();
+        result
+          .then((value) => (document.querySelector("#res").innerText = value))
+          .catch((val) => (document.querySelector("#error").innerText = val));
+      }
+      //////////////////////////////////////////////
+      function isMinArrAsync(arr) {
+        let promise1 = new Promise((resolve, reject) => {
+          if (arr.length > 0 && arr.every(Number.isFinite)) {
+            resolve(arr);
+          } else {
+            reject(arr);
+          }
+        });
+        return promise1;
+      }
+      let resolveHandler = (arr) => console.log(Math.min(...arr));
+      let rejectHandler = () => console.log("invalid");
+      const result = isMinArrAsync([1, 44, 3, 2]);
+      result.then(resolveHandler).catch(rejectHandler);
+      //////////////////////////////////////////////
+    </script>
+  </body>
+</html>

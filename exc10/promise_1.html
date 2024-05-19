@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="success" onclick="print(true)">success</button>
+    <button id="failure" onclick="print(false)">failure</button>
+    <script>
+      function printSuccessOrFailure(bool) {
+        let promise1 = new Promise((resolve, reject) => {
+          if (bool) {
+            resolve();
+          } else {
+            reject();
+          }
+        });
+        return promise1;
+      }
+      function print(btnBoolean) {
+        bool = btnBoolean;
+        let resolveHandler = () =>
+          setTimeout(() => {
+            console.log("success");
+          }, 2000);
+        let rejectHandler = () =>
+          setTimeout(() => {
+            console.error("failure");
+          }, 3000);
+        let result = printSuccessOrFailure(bool);
+        result.then(resolveHandler).catch(rejectHandler);
+      }
+    </script>
+  </body>
+</html>

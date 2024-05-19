@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="clicked()">show progress bar</button>
+    <img
+      id="bar"
+      src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Bert2_transp_green_cont_150ms.gif"
+      style="display: none"
+    />
+    <script>
+      function createPromise() {
+        let promise1 = new Promise((resolve) => {
+          resolve();
+        });
+        return promise1;
+      }
+      function clicked() {
+        let promise1 = createPromise();
+        promise1.then(showBar);
+      }
+      function showBar() {
+        let bar = document.querySelector("#bar");
+        bar.style.display = "block";
+        setTimeout(() => {
+          bar.style.display = "none";
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>

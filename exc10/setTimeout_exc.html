@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="all"><p id="seconds">0</p></div>
+
+    <script>
+      let count = 0;
+      const f1 = () => console.log("f1");
+      const f2 = () => console.log("f2");
+      const f3 = () => console.log("f3");
+      startTime = new Date();
+      intervalId = setInterval(function () {
+        count++;
+        document.querySelector("#seconds").innerText = count;
+      }, 1000);
+      setTimeout(function () {
+        f1();
+        let f1t = new Date();
+        let f1e = document.createElement("p");
+        console.log(Math.floor((f1t - startTime) / 1000));
+        f1e.innerText = Math.floor((f1t - startTime) / 1000);
+        document.querySelector("#all").appendChild(f1e);
+        setTimeout(function () {
+          f2();
+          let f2t = new Date();
+          let f2e = document.createElement("p");
+          console.log(Math.floor((f2t - f1t) / 1000));
+          f2e.textContent = Math.floor((f2t - f1t) / 1000);
+          document.querySelector("#all").appendChild(f2e);
+          setTimeout(function () {
+            f3();
+            let f3t = new Date();
+            let f3e = document.createElement("p");
+            console.log(Math.floor((f3t - f2t) / 1000));
+            f3e.textContent = Math.floor((f3t - f2t) / 1000);
+            document.querySelector("#all").appendChild(f3e);
+          }, 5000);
+        }, 3000);
+      }, 1000);
+    </script>
+  </body>
+</html>

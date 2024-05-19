@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <style>
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        margin: 0 auto;
+      }
+
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="loader"></div>
+    <label id="count"></label>
+    <table id="tbl"></table>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <script>
+      const url = "https://jsonplaceholder.typicode.com/posts";
+      function startSpinner() {}
+      axios
+        .get(url)
+        .then(function (response) {
+          // handle success
+          let entireTableData = response.data;
+          setTimeout(function () {
+            document.querySelector("#count").innerText = response.data.length;
+            for (let postData of entireTableData) {
+              let row = document.createElement("tr");
+              document.querySelector("#tbl").appendChild(row);
+              for (let key in postData) {
+                let cell = document.createElement("td");
+                cell.innerText = postData[key];
+                row.appendChild(cell);
+              }
+            }
+            document.querySelector(".loader").style.display = "none";
+          }, 5000);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
+    </script>
+  </body>
+</html>
