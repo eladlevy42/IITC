@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Untitled</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="results"></div>
+    <script>
+      const postsURL = "https://jsonplaceholder.typicode.com/posts";
+      const usersURL = "https://jsonplaceholder.typicode.com/users";
+      const commentsURL = "https://jsonplaceholder.typicode.com/comments";
+
+      Promise.all([
+        axios.get(postsURL),
+        axios.get(usersURL),
+        axios.get(commentsURL),
+      ])
+        .then(([postsResponse, usersResponse, commentsResponse]) => {
+          const posts = postsResponse.data;
+          const users = usersResponse.data;
+          const comments = commentsResponse.data;
+          const count = posts.length + users.length + comments.length;
+          const resultsDiv = document.getElementById("results");
+          resultsDiv.innerHTML = `
+                <p>Number of total: ${count}</p>
+            `;
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    </script>
+  </body>
+</html>
