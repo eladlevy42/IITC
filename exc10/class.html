@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ol id="todoList"></ol>
+    <script>
+      let todoList = document.getElementById("todoList");
+      const todos = [
+        "basketball game",
+        "soccer game",
+        "birthday",
+        "test",
+        "work",
+      ];
+
+      function addArrToDom() {
+        for (let tasks of todos) {
+          let task = `<li onclick = deleteItem(this)> ${tasks} </li>`;
+          todoList.innerHTML += task;
+        }
+      }
+      addArrToDom();
+
+      function deleteItem(item) {
+        console.log(item);
+        let index = Array.prototype.indexOf.call(todoList.children, item);
+        console.log(index);
+        if (index !== -1) {
+          todos.splice(index, 1);
+          todoList.removeChild(item);
+        }
+      }
+    </script>
+  </body>
+</html>

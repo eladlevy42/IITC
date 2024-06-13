@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const p1 = new Promise((resolve) => {
+        setTimeout(() => resolve("hello"), 1000);
+      });
+      const p2 = new Promise((resolve) => {
+        setTimeout(() => resolve("world"), 2000);
+      });
+      const p3 = new Promise((resolve, reject) => {
+        setTimeout(() => reject("!"), 3000);
+      });
+      async function print() {
+        const promise2 = await p2;
+        console.log(promise2);
+        const promise1 = await p1;
+        console.log(promise1);
+      }
+      print();
+    </script>
+  </body>
+</html>

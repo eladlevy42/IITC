@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="post">
+      <input required type="text" id="title" placeholder="title" />
+      <input required type="number" id="views" placeholder="views" />
+      <button type="submit">POST</button>
+    </form>
+    <form id="delete">
+      <input required type="text" id="id" placeholder="ID" />
+      <button type="submit">Delete by ID</button>
+    </form>
+
+    <label id="alert"></label>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const url = "http://localhost:8001/posts";
+
+      function uploadPost() {
+        let userTitle = document.querySelector("#title").value;
+        let userViews = document.querySelector("#views").value;
+        let post = {
+          title: userTitle,
+          views: userViews,
+        };
+        axios
+          .post(url, post)
+          .then(() => {
+            document.querySelector("#alert").innerText = "success";
+          })
+          .catch((err) => {
+            document.querySelector("#alert").innerText = err.message;
+          });
+      }
+      function deletePost() {
+        let id = document.querySelector("#id");
+        axios.delete(url + "/" + id.value).then((response) => {
+          console.log("deleted");
+        });
+      }
+      let uploadPosts = document.querySelector("#post");
+      uploadPosts.addEventListener("submit", function (event) {
+        event.preventDefault();
+        uploadPost();
+      });
+      let deletePosts = document.querySelector("#delete");
+      deletePosts.addEventListener("submit", function (event) {
+        event.preventDefault();
+        deletePost();
+      });
+    </script>
+  </body>
+</html>
