@@ -32,18 +32,15 @@ ul {
 .delete-btn {
   margin-bottom: 10px;
 }
+.list-item-content {
+  display: flex;
+  align-items: center;
+}
+
 .todo-item-name {
   font-size: 18px;
 }
-.custom-checkbox {
-  display: none;
-}
 
-.custom-checkbox + .custom-checkbox-label {
-  position: relative;
-  padding-left: 25px;
-  cursor: pointer;
-}
 .content-card {
   background-color: #ffffcc;
   padding: 2em;
@@ -53,7 +50,7 @@ ul {
   width: 100%;
   max-width: 600px;
 }
-
+/* 
 .custom-checkbox + .custom-checkbox-label::before {
   content: "";
   position: absolute;
@@ -64,7 +61,7 @@ ul {
   border: 2px solid #333;
   background-color: #fff;
   border-radius: 3px; /* Optional: make it square or rounded */
-}
+/* }
 .custom-checkbox + .custom-checkbox-label::after {
   content: "";
   position: absolute;
@@ -85,7 +82,7 @@ ul {
 
 .custom-checkbox:checked + .custom-checkbox-label::after {
   transform: scale(1);
-}
+} */
 .delete-btn {
   background-color: #ff4d4d;
   color: white;

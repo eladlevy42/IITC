@@ -1,5 +1,6 @@
 import React from "react";
-
+import Button from "@mui/material/Button";
+import { Tooltip, Typography } from "@mui/material";
 const TodoItem = ({ todo, toggleTodoComplete, deleteTodo }) => {
   return (
     <li className="todo-list-item">
@@ -8,30 +9,33 @@ const TodoItem = ({ todo, toggleTodoComplete, deleteTodo }) => {
           type="checkbox"
           checked={todo.isComplete}
           id={todo.id}
-          className={`${
-            todo.isComplete ? "complete" : ""
-          } todo-item-checkbox custom-checkbox`}
+          className={`${todo.isComplete ? "complete" : ""} `}
           onChange={() => {
             toggleTodoComplete(todo.id);
           }}
         />
-        <label
-          className={`${
-            todo.isComplete ? "complete" : ""
-          } todo-item-name custom-checkbox-label`}
+        <Typography
+          className={`${todo.isComplete ? "complete" : ""} todo-item-name`}
           htmlFor={todo.id}
+          mt={2}
+          sx={{}}
         >
           {todo.title}
-        </label>
+        </Typography>
+        <label></label>
       </div>
-      <button
-        className="delete-btn"
-        onClick={() => {
-          deleteTodo(todo.id);
-        }}
-      >
-        Delete todo
-      </button>
+      <Tooltip title="delete" arrow>
+        <Button
+          sx={{ fontSize: 10, fontWeight: "medium", marginBlock: 1 }}
+          onClick={() => {
+            deleteTodo(todo.id);
+          }}
+          variant="contained"
+        >
+          {" "}
+          Delete todo
+        </Button>
+      </Tooltip>
     </li>
   );
 };
