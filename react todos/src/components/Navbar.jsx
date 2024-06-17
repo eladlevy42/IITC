@@ -1,5 +1,34 @@
 import React from "react";
 
+import { Link, NavLink, Route, Routes } from "react-router-dom";
+function TopNavLink(props) {
+  const { href, children } = props;
+  return (
+    <NavLink
+      style={({ isActive }) => {
+        return isActive ? { color: "green" } : {};
+      }}
+      to={href}
+    >
+      {children}
+    </NavLink>
+  );
+}
+
 export default function Navbar() {
-  return <div></div>;
+  return (
+    <nav>
+      <ul>
+        <li>
+          <TopNavLink href="/">Home</TopNavLink>
+        </li>
+        <li>
+          <TopNavLink href="/TodoPage">My List</TopNavLink>
+        </li>
+        <li>
+          <TopNavLink href="/Create">Create</TopNavLink>
+        </li>
+      </ul>
+    </nav>
+  );
 }
