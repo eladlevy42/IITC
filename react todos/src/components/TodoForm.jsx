@@ -1,14 +1,21 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { TextField, Tooltip } from "@mui/material";
-const TodoForm = ({ addTodo, inputRef }) => {
+const TodoForm = ({ addTodo, titleRef, descRef }) => {
   return (
     <form className="add-todo-form" onSubmit={addTodo}>
       <TextField
         sx={{ width: 150 }}
-        inputRef={inputRef}
+        inputRef={titleRef}
         id="outlined-basic"
-        label="Add new Todo"
+        label="Title"
+        variant="outlined"
+      />
+      <TextField
+        sx={{ width: 150 }}
+        inputRef={descRef}
+        id="outlined-basic"
+        label="Description"
         variant="outlined"
       />
       <Tooltip title="Add" arrow>

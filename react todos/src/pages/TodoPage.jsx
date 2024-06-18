@@ -3,9 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import TodoForm from "../components/TodoForm";
 import FilterTodos from "../components/FilterTodos";
 import TodoList from "../components/TodoList";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Modal, Box } from "@mui/material";
 import CustomizedProgressBars from "../components/TodoStatistics";
-import { Link } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import CreateTodoPage from "./CreateTodoPage";
 
 export default function TodoPage() {
   function makeId(length = 5) {
@@ -18,11 +19,13 @@ export default function TodoPage() {
     }
     return result;
   }
+
   // function App() {
   //states
   const [todos, setTodos] = useState("");
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [precent, setPrecent] = useState(100);
   //useEffects
   async function refreshData() {
     setLoading(true);
@@ -42,7 +45,7 @@ export default function TodoPage() {
   useEffect(() => {
     console.log("hello!");
     refreshData();
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {}, [todos]);
 
@@ -62,7 +65,6 @@ export default function TodoPage() {
   }
   async function toggleTodoApi(todo) {
     todo.isComplete = !todo.isComplete;
-
     await axios.put(`http://localhost:8001/todos/${todo.id}`, todo);
     refreshData();
   }
@@ -79,30 +81,40 @@ export default function TodoPage() {
     });
     setTodos(copyTodos);
   }
+
   async function search() {
     console.log("searching...");
     const searchValue = searchRef.current.value;
     let copyTodos = await getData();
+    console.log(checked);
+
     copyTodos = copyTodos.filter(
       (todo) => todo.title.includes(searchValue) && todo.isComplete === checked
     );
+
     if (copyTodos.length == 0) {
       console.log("empty");
       refreshData();
       return;
     }
+
     setTodos(copyTodos);
+  }
+  const navigate = useNavigate();
+  function openCreate() {
+    navigate("/Todo/create");
   }
   return (
     <div className="content-wrapper">
       <div className="content-card">
+        {" "}
+        <h1>My List</h1>
         {todos.length === 0 ? (
           <></>
         ) : (
           <>
-            <Button component={Link} to={"/Create"}>
-              Add New Todo
-            </Button>
+            <Button onClick={openCreate}>Add New Todo</Button>
+
             <FilterTodos
               setChecked={setChecked}
               checked={checked}
@@ -134,13 +146,14 @@ export default function TodoPage() {
                   }
                 </p>
               </div>
-              <Typography mt={2}>Todos progress:</Typography>
+              <Typography mt={2}>Todos progress: {precent}</Typography>
 
               <CustomizedProgressBars todos={todos}></CustomizedProgressBars>
             </div>
           </>
         )}
       </div>
+      <Outlet />
     </div>
   );
 }

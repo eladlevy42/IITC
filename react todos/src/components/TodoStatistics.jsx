@@ -23,8 +23,10 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const CustomizedProgressBars = ({ todos }) => {
   const totalTodos = todos.filter((todo) => todo.isComplete === true).length;
+
   const hundredPrecent = todos.length;
   const precent = (totalTodos / hundredPrecent) * 100;
+  console.log(precent);
   return (
     <Stack spacing={2} sx={{ flexGrow: 1 }}>
       <BorderLinearProgress variant="determinate" value={precent} />

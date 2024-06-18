@@ -23,10 +23,7 @@ export default function Navbar() {
           <TopNavLink href="/">Home</TopNavLink>
         </li>
         <li>
-          <TopNavLink href="/TodoPage">My List</TopNavLink>
-        </li>
-        <li>
-          <TopNavLink href="/Create">Create</TopNavLink>
+          <TopNavLink href="/Todo">My List</TopNavLink>
         </li>
       </ul>
     </nav>

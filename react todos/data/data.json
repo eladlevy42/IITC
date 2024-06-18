@@ -1,33 +1,27 @@
 {
   "todos": [
     {
-      "id": "7",
-      "title": "Learn TypeScript",
-      "isComplete": false
-    },
-    {
-      "id": "8",
-      "title": "Refactor Codebase",
-      "isComplete": true
-    },
-    {
       "id": "9",
       "title": "Optimize Performance",
-      "isComplete": true
+      "isComplete": true,
+      "description": "A task aimed at enhancing the efficiency and speed of the application."
     },
     {
       "id": "10",
       "title": "Deploy to Production",
-      "isComplete": true
+      "isComplete": true,
+      "description": "The final step to release the application to the production environment, making it available for end-users."
     },
     {
       "id": "dYDTT",
       "title": "Learn React Native",
-      "isComplete": true
+      "isComplete": false,
+      "description": "A task to understand and build mobile applications using React Native, a framework for building native apps using React."
     },
     {
-      "id": "WnULW",
+      "id": "rei8t",
       "title": "elad",
+      "description": "sfdsfdsfd",
       "isComplete": false
     }
   ]
