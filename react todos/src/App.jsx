@@ -1,18 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import TodoList from "./components/TodoList";
-import TodoForm from "./components/TodoForm";
-import FilterTodos from "./components/FilterTodos";
-import axios from "axios";
-import Button from "@mui/material/Button";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { CircularProgress, Typography } from "@mui/material";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
-import CustomizedProgressBars from "./components/TodoStatistics";
 import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
 import CreateTodoPage from "./pages/CreateTodoPage";

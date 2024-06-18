@@ -27,9 +27,7 @@ export default function CreateTodoPage() {
   const navigate = useNavigate();
   const titleRef = useRef(null);
   const descRef = useRef(null);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => navigate("/Todo");
   const location = useLocation();
   const style = {
     position: "absolute",
@@ -60,7 +58,7 @@ export default function CreateTodoPage() {
   return (
     <>
       <Modal
-        open={open}
+        open={true}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
