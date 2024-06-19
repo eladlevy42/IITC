@@ -36,7 +36,7 @@ export default function TodoDetailsPage() {
         <Button
           variant="contained"
           onClick={() => {
-            navigate("/TodoPage", { replace: true });
+            navigate("/Todo", { replace: true });
           }}
         >
           Back

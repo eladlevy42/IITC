@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import TodoForm from "../components/TodoForm";
 import FilterTodos from "../components/FilterTodos";
 import TodoList from "../components/TodoList";
-import { Button, Typography, Modal, Box } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import CustomizedProgressBars from "../components/TodoStatistics";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import CreateTodoPage from "./CreateTodoPage";
+import { Outlet, useNavigate } from "react-router-dom";
+import LinearDeterminate from "../components/TodoStatistics";
+import zIndex from "@mui/material/styles/zIndex";
 
 export default function TodoPage() {
   function makeId(length = 5) {
@@ -25,7 +25,6 @@ export default function TodoPage() {
   const [todos, setTodos] = useState("");
   const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [precent, setPrecent] = useState(100);
   //useEffects
   async function refreshData() {
     setLoading(true);
@@ -106,6 +105,7 @@ export default function TodoPage() {
   }
   return (
     <div className="content-wrapper">
+      {" "}
       <div className="content-card">
         {" "}
         <h1>My List</h1>
@@ -113,8 +113,8 @@ export default function TodoPage() {
           <></>
         ) : (
           <>
+            {" "}
             <Button onClick={openCreate}>Add New Todo</Button>
-
             <FilterTodos
               setChecked={setChecked}
               checked={checked}
@@ -146,9 +146,7 @@ export default function TodoPage() {
                   }
                 </p>
               </div>
-              <Typography mt={2}>Todos progress: {precent}</Typography>
-
-              <CustomizedProgressBars todos={todos}></CustomizedProgressBars>
+              <CustomizedProgressBars todos={todos} />
             </div>
           </>
         )}
